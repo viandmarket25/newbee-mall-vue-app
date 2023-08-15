@@ -37,7 +37,7 @@
 
           </div>
 
-         
+
 
 <!--
  <img src="https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/store-card-40-iphone-14-pro-202303?wid=800&hei=1000&fmt=p-jpg&qlt=95&.v=1677311465897" style="width:100%; height:450px; margin-top:12px; border-radius: 6px; float:left; background-repeat: no-repeat;" />
@@ -108,6 +108,7 @@
 
 
 
+
   </div>
 
 
@@ -118,10 +119,11 @@ import UserSummary from './user-summary.vue';
 
 import HomeBanner from './home-banner.vue';
 
+
 export default {
   name: "SponsoredPage",
   components:{
-    UserSummary,HomeBanner
+    UserSummary,HomeBanner,
 
   },
   //mixins: [web3Modal],

@@ -17,7 +17,7 @@
         <div class="header-search">
             <span class="app-name" style="font-size:20px;">SALESBOYI</span>
             <i class="iconfont icon-search"></i>
-            <router-link tag="span" class="search-title" to="./product-list?from=home">search</router-link>
+            <router-link tag="span" class="search-title" style="box-shadow: 0 0 0 1px #f1f1f1; width:80%; font-size:12px; padding-left:10px; border-radius:4px;" to="./product-list?from=home">SEARCH, ITEM, COLLECTION</router-link>
         </div>
         <router-link class="login" tag="span" to="./login" v-if="!isLogin" style="font-size:14px;">Login</router-link>
         <router-link class="login" tag="span" to="./user" v-else>
@@ -49,6 +49,14 @@
 
     -->
 
+    <div class="category-list-">
+       <Showcase v-if="showcase" />
+    </div>
+
+
+
+
+
 
 
     <div class="good" style="margin-bottom:20px; width:100%; min-height:100px; float:left; ">
@@ -59,7 +67,7 @@
         New Arrivals
         </header>
 
- 
+
       <div class="good-box">
         <div class="good-item" v-for="item in newGoodses" :key="item.goodsId" @click="goToDetail(item)">
           <img :src="prefix(item.goodsCoverImg)" alt="">
@@ -108,10 +116,20 @@ import { getHome } from '../service/home'
 import { getUserInfo } from '../service/user'
 import { getLocal } from '@/common/js/utils'
 import { Toast } from 'vant'
+
+import Showcase from '@/components/showcase.vue';
+
+
 export default {
   name: 'home',
+  components: {
+    navBar,
+    swiper,
+    SponsoredPage,Showcase
+  },
   data() {
     return {
+      showcase:false,
           collections: [
 
               {
@@ -299,11 +317,7 @@ export default {
       ],
     }
   },
-  components: {
-    navBar,
-    swiper,
-    SponsoredPage,
-  },
+
   async mounted() {
     const token = getLocal('token')
     if (token) {
