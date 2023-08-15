@@ -29,11 +29,20 @@
           </ul>
         </div>
           </div>
-          <img src="https://imgcps.jd.com/ling-cubic/ling4/lab/amZzL3QxLzIwNTc5OC8zMS8yNjQzOS8xMDYzODAvNjMxOTI2YWFFMWZhNWEwZWIvNjBhNjAzNmU0NTZhYjNmYi5wbmc/5Lqs6YCJ5aW96LSn/5L2g5YC85b6X5oul5pyJ/1635183047968657409/cr/s/q.jpg" style="width:100%; height:450px; margin-top:12px; border-radius: 6px; float:left; background-repeat: no-repeat;" />
 
 
+          <div  style="width:100%; height:450px; margin-top:12px; border-radius: 6px; float:left; background-repeat: no-repeat;" >
+
+            <HomeBanner  />
+
+          </div>
+
+         
 
 <!--
+ <img src="https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/store-card-40-iphone-14-pro-202303?wid=800&hei=1000&fmt=p-jpg&qlt=95&.v=1677311465897" style="width:100%; height:450px; margin-top:12px; border-radius: 6px; float:left; background-repeat: no-repeat;" />
+
+
           <div style="width:100%; height:150px;  margin-top:6px; float:left;  ">
             <div style="width:49.6%; height:150px; margin-right:0.4%; float:left;  ">
               <img src="@/assets/images/banner-40.png" style="width:100%; height:100%; background-size:100% 100%; " />
@@ -107,10 +116,12 @@
 
 import UserSummary from './user-summary.vue';
 
+import HomeBanner from './home-banner.vue';
+
 export default {
   name: "SponsoredPage",
   components:{
-    UserSummary
+    UserSummary,HomeBanner
 
   },
   //mixins: [web3Modal],

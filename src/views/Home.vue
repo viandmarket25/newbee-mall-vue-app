@@ -19,7 +19,7 @@
             <i class="iconfont icon-search"></i>
             <router-link tag="span" class="search-title" to="./product-list?from=home">search</router-link>
         </div>
-        <router-link class="login" tag="span" to="./login" v-if="!isLogin">Login</router-link>
+        <router-link class="login" tag="span" to="./login" v-if="!isLogin" style="font-size:14px;">Login</router-link>
         <router-link class="login" tag="span" to="./user" v-else>
           <van-icon name="manager-o" />
         </router-link>
@@ -52,7 +52,14 @@
 
 
     <div class="good" style="margin-bottom:20px; width:100%; min-height:100px; float:left; ">
-      <header class="good-header">New Arrivals</header>
+      <header class="good-header">
+
+              <div class="inner-square-" stylle="height:20px; width:4px; background:#ccc;"></div>
+
+        New Arrivals
+        </header>
+
+ 
       <div class="good-box">
         <div class="good-item" v-for="item in newGoodses" :key="item.goodsId" @click="goToDetail(item)">
           <img :src="prefix(item.goodsCoverImg)" alt="">
@@ -474,8 +481,8 @@ export default {
       height: 50px;
       line-height: 50px;
       text-align: center;
-      color: @primary;
-      font-size: 16px;
+      color:#000;
+      font-size: 13px;
       font-weight: 500;
     }
     .good-box {
@@ -995,5 +1002,47 @@ export default {
   &__button {
     margin: 0 0 0 var(--spacer-xs);
   }
+}
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+}
+
+.cs-div-shape {
+  width: 20px;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  background-color: #f0f0f0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.cs-div-curved-square-1 {
+  background-color: #ff6b6b;
+  border-radius: 5px;
+  transform: rotate(-15deg);
+}
+
+.cs-div-curved-square-2 {
+  background-color: #6bb0ff;
+  border-radius: 15px;
+  transform: rotate(15deg);
+}
+
+.inner-square {
+  width: 10px;
+  height: 10px;
+  background-color: white;
+  border-radius: 2px;
+  position: absolute;
+}
+
+.title {
+  font-size: 24px;
+  margin: 0;
 }
 </style>

@@ -80,7 +80,7 @@
           }
           i {
             text-align: center;
-            font-size: 22px;
+            font-size: 18px;
           }
           span{
             font-size: 11px;
