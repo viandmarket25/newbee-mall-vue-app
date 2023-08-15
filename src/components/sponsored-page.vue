@@ -3,51 +3,35 @@
     <div @mouseleave="hoverCategoryView(0)"  style="min-width:1100px;  max-width:1400px; max-height:auto; min-height:560px;  background:#ffffff; ">
 
      <!---kkk -->
-      <div style="width:20%; height:660px; margin-right:0%; box-shadow:0px 0px 0px 1px #f1f1f1; float:left;  ">
+      <div style="width:22.4%; height:490px; margin-right:5px;   float:left;  ">
+       <!--
         <div style="width:100%; height:50px;  float:left;  ">
+
             <div style="width:90%; font-family:Montserrat-Bold; height:50px; font-size:16px; line-height:50px; text-align:left; margin-left:10%; " >All Categories</div>
         </div>
+        -->
+        <div style="width:100%; height:10px;  float:left;  ">
+
+        </div>
         <div @mouseover="hoverProductCategoryContainer(1)" style="width:100%; height:90vh;  float:left;  ">
-          <div @mouseover="hoverProductCategory(1,productCategory)" @mouseleave="hoverProductCategory(0,productCategory)" v-for="(productCategory,index) in productCategories"  :key="index" class="product-category-menu" style="font-size:12px; height:20px; line-height:20px;"  >{{productCategory.title}}</div>
+          <div @mouseover="hoverProductCategory(1,productCategory)" @mouseleave="hoverProductCategory(0,productCategory)" v-for="(productCategory,index) in productCategories"  :key="index" class="product-category-menu" style=" font-size:12px; height:24px; color:#404040; line-height:24px;"  >{{productCategory.title}}</div>
         </div>
       </div>
-      <div style="width:50%; height:660px; max-height:auto; float:left;  background:#ffffff; position:relative; ">
+      <div style="width:53%; height:490px; max-height:auto; float:left;  background:#ffffff; position:relative; ">
 
 
         <div v-show="buyerView.featured.canShow"  style="width:100%; height:560px; float:left; overflow:hidden; position:absolute; ">
-          <div @mouseover="hoverCategoryView(0)"  style="width:100%; height:0px; margin-top:2px; float:left;  ">
+          <div @mouseover="hoverCategoryView(0)"  style="width:100%; height:20px; margin-top:10px; float:left;  ">
+        <div class="menu-bar">
+          <ul class="menu-items">
+            <li class="menu-item" style="font-size:10px; line-height:20px; text-align:left;" v-for="(item,index) in fastFeatures" :key="index" >{{item}}</li>
 
+          </ul>
+        </div>
           </div>
-          <div style="width:100%; height:490px; margin-top:0px; float:left; clear:left; ">
-            <div  style=" width:100%;  height:490px;   ">
-              <a-carousel arrows autoplay >
-                <template #prevArrow>
-                  <div class="custom-slick-arrow" style="left:10px; z-index:1; ">
-                    <left-circle-outlined />
-                  </div>
-                </template>
-                <template #nextArrow>
-                  <div class="custom-slick-arrow" style="right:10px">
-                    <right-circle-outlined />
-                  </div>
-                </template>
-                <!--  getImageUrl(image)-->
-                <img src="https://img.freepik.com/free-vector/modern-sale-banner-with-product-description_1361-1259.jpg?w=1800&t=st=1692053198~exp=1692053798~hmac=9f1587804c6e38798787bb3a83751faaef72584ed7693c61a31013c2ca45c0dc" style="width:100%; height:190px; float:left; background-repeat: no-repeat;" />
-
-               <!--
-
-                <div class="centered-position" v-for="(image,index) in mainBannerList"  :key="index"  >
-                    <img src="https://img.freepik.com/free-vector/modern-sale-banner-with-product-description_1361-1259.jpg?w=1800&t=st=1692053198~exp=1692053798~hmac=9f1587804c6e38798787bb3a83751faaef72584ed7693c61a31013c2ca45c0dc" style="width:100%; height:190px; float:left; background-repeat: no-repeat;" />
-
-                </div>
-                -->
+          <img src="https://imgcps.jd.com/ling-cubic/ling4/lab/amZzL3QxLzIwNTc5OC8zMS8yNjQzOS8xMDYzODAvNjMxOTI2YWFFMWZhNWEwZWIvNjBhNjAzNmU0NTZhYjNmYi5wbmc/5Lqs6YCJ5aW96LSn/5L2g5YC85b6X5oul5pyJ/1635183047968657409/cr/s/q.jpg" style="width:100%; height:450px; margin-top:12px; border-radius: 6px; float:left; background-repeat: no-repeat;" />
 
 
-
-              </a-carousel>
-            </div>
-
-          </div>
 
 <!--
           <div style="width:100%; height:150px;  margin-top:6px; float:left;  ">
@@ -101,10 +85,10 @@
         </div>
         -->
 
-         <div class="" style="width:260px; height:660px;  box-shadow:0px 0px 0px 1px #f1f1f1; float:right; ">
-                <UserSummary  msg=""/>
-              </div>
 
+      </div>
+      <div class="" style="width:260px; height:490px;  float:right; ">
+          <UserSummary  msg=""/>
       </div>
 
 
@@ -124,7 +108,7 @@
 import UserSummary from './user-summary.vue';
 
 export default {
-  name: "userProfileWidget",
+  name: "SponsoredPage",
   components:{
     UserSummary
 
@@ -143,6 +127,13 @@ export default {
   },
   data(){
     return {
+       fastFeatures: [
+              'Instant Checkout',
+              'One-Click Purchase',
+              'Fast Shipping',
+              'Real-time Tracking',
+              'Secure Payments',
+            ],
       buyerView:{
         featured:{canShow:true},
         map:{canShow:false},
@@ -824,4 +815,49 @@ router-link{
    text-decoration: none;
 }
 
+
+.menu-bar {
+
+  height: 20px;
+}
+
+.menu-items {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.menu-item {
+  position: relative;
+
+font-family:Poppins-Regular;
+  font-size: 12px;
+  color: #404040;
+  padding: 0 8px;
+  line-height: 20px;
+  cursor: pointer;
+}
+
+.menu-item:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  top: 40%;
+  right: 0;
+  transform: translateY(-50%);
+  width: 1px;
+  height: 14px;
+  background-color: #ccc;
+}
+
+.menu-item:hover {
+
+}
+.topbar {
+  position: relative;
+  z-index: 2;
+  &__button {
+    margin: 0 0 0 var(--spacer-xs);
+  }
+}
 </style>

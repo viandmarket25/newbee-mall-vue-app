@@ -24,6 +24,7 @@
       }
     },
     watch: {
+      
       $route(to, from) {
         // 有主级到次级
         if (to.meta.index > from.meta.index) {
@@ -35,6 +36,9 @@
           this.transitionName = ''   //同级无过渡效果
         }
       }
+      
+      
+      
     }
   }
 </script>

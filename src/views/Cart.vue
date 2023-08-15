@@ -57,8 +57,8 @@
     </van-submit-bar>
     <div class="empty" v-if="!list.length">
       <van-icon name="smile-o" />
-      <div class="title">购物车空空空如也</div>
-      <van-button color="#1baeae" type="primary" @click="goTo" block>前往首页</van-button>
+      <div class="title">Your Cart is Empty</div>
+      <van-button color="#1baeae" type="primary" @click="goTo" block>Go to Homepage</van-button>
     </div>
     <nav-bar></nav-bar>
   </div>
@@ -98,7 +98,7 @@ export default {
   },
   methods: {
     async init() {
-      Toast.loading({ message: '加载中...', forbidClick: true });
+      Toast.loading({ message: 'loading...', forbidClick: true });
       const { data } = await getCart({ pageNumber: 1 })
       this.list = data
       this.result = data.map(item => item.cartItemId)
@@ -112,7 +112,7 @@ export default {
     },
     async onChange(value, detail) {
       if (this.list.filter(item => item.cartItemId == detail.name)[0].goodsCount == value) return
-      Toast.loading({ message: '修改中...', forbidClick: true });
+      Toast.loading({ message: 'loading...', forbidClick: true });
       const params = {
         cartItemId: detail.name,
         goodsCount: value
@@ -127,7 +127,7 @@ export default {
     },
     async onSubmit() {
       if (this.result.length == 0) {
-        Toast.fail('请选择商品进行结算')
+        Toast.fail('Please Select Items for Checkout')
         return
       }
       const params = JSON.stringify(this.result)

@@ -12,27 +12,23 @@
   <div>
 
 
-
-
-
-
-
-
     <header class="home-header wrap" :class="{'active' : headerScroll}">
         <router-link tag="i" to="./category"><i class="nbicon nbmenu2"></i></router-link>
         <div class="header-search">
             <span class="app-name" style="font-size:20px;">SALESBOYI</span>
             <i class="iconfont icon-search"></i>
-            <router-link tag="span" class="search-title" to="./product-list?from=home">山河无恙，人间皆安</router-link>
+            <router-link tag="span" class="search-title" to="./product-list?from=home">search</router-link>
         </div>
-        <router-link class="login" tag="span" to="./login" v-if="!isLogin">登录</router-link>
+        <router-link class="login" tag="span" to="./login" v-if="!isLogin">Login</router-link>
         <router-link class="login" tag="span" to="./user" v-else>
           <van-icon name="manager-o" />
         </router-link>
     </header>
     <nav-bar></nav-bar>
-    <div class="category-list- centered-position" style="margin-top:80px; width:100vw; float:left; background:#fbfbfb; box-shadow: 0 0 1px #f1f1f1;">
 
+
+
+    <div class="category-list- centered-position" style="margin-top:90px; width:100vw; float:left; background:#f0f0f0; margin-bottom:40px; ">
     <SponsoredPage/>
 
 
@@ -43,7 +39,7 @@
 
 
 
-<!--
+    <!--
     <div class="category-list">
       <div v-for="item in categoryList" v-bind:key="item.categoryId">
         <img :src="item.imgUrl">
@@ -55,8 +51,8 @@
 
 
 
-    <div class="good">
-      <header class="good-header">新品上线</header>
+    <div class="good" style="margin-bottom:20px; width:100%; min-height:100px; float:left; ">
+      <header class="good-header">New Arrivals</header>
       <div class="good-box">
         <div class="good-item" v-for="item in newGoodses" :key="item.goodsId" @click="goToDetail(item)">
           <img :src="prefix(item.goodsCoverImg)" alt="">
@@ -67,9 +63,9 @@
         </div>
       </div>
     </div>
-    <div class="good">
-      <header class="good-header">热门商品</header>
-      <div class="good-box">
+    <div class="good" style="margin-bottom:20px; width:100%; min-height:100px; float:left;">
+      <header class="good-header">Popular Products</header>
+      <div class="good-box" style="min-height:100px;">
         <div class="good-item" v-for="item in hots" :key="item.goodsId" @click="goToDetail(item)">
           <img :src="prefix(item.goodsCoverImg)" alt="">
           <div class="good-desc">
@@ -79,8 +75,8 @@
         </div>
       </div>
     </div>
-    <div class="good" :style="{ paddingBottom: '100px'}">
-      <header class="good-header">最新推荐</header>
+    <div class="good" style="padding-bottom:100px; margin-bottom:20px; width:100%; min-height:100px; float:left;">
+      <header class="good-header">Latest Recommendations</header>
       <div class="good-box">
         <div class="good-item" v-for="item in recommends" :key="item.goodsId" @click="goToDetail(item)">
           <img :src="prefix(item.goodsCoverImg)" alt="">
@@ -306,22 +302,27 @@ export default {
     if (token) {
       this.isLogin = true
     }
+    /*
     window.addEventListener('scroll', this.pageScroll)
     Toast.loading({
       message: 'loading...',
       forbidClick: true
     });
+
+    /*
     const { data } = await getHome()
+
+    console.log(data)
+
     this.swiperList = data.carousels
     this.newGoodses = data.newGoodses
     this.hots = data.hotGoodses
     this.recommends = data.recommendGoodses
-    Toast.clear()
+    */
+   // Toast.clear()
   },
   methods: {
         filteredItems(index) {
-
-
         // Custom filtering logic based on the index
         // Modify the condition below according to your requirements
         return index === 0 ? this.categories[index]['subcategories'] : [];
@@ -952,4 +953,47 @@ export default {
 
 
 
+.menu-bar {
+
+  height: 60px;
+}
+
+.menu-items {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.menu-item {
+  position: relative;
+  font-family: Satoshi-Medium;
+  font-size: 12px;
+  color: #404040;
+  padding: 0 20px;
+  line-height: 60px;
+  cursor: pointer;
+}
+
+.menu-item:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  width: 1px;
+  height: 14px;
+  background-color: #404040;
+}
+
+.menu-item:hover {
+
+}
+.topbar {
+  position: relative;
+  z-index: 2;
+  &__button {
+    margin: 0 0 0 var(--spacer-xs);
+  }
+}
 </style>

@@ -110,22 +110,7 @@
 
           </div>
 
-          <div class="centered-position" style="width:100%;  height:60px; ">
-            <div style="height:54px; width:80px; background:#fafafa; margin:1px; border-radius:4px; float:left; cursor:pointer;">
-              <div class="centered-position"  style="width:100%; height:26px; margin-top:6px;  float:left;  ">
-                <div class="centered-position" style="width:26px; height:26px; border-radius:10px; ">
-                  <img src="@/assets/icons/buyer-icons/video.png" style="width:24px; height:24px; " />
-                </div>
-              </div>
-              <div class="centered-position" style=" width:100%; height:20px; float:left; ">
-                 <div style="font-family:Poppins-Bold; font-size:12px; line-height:20px; color:#404040; width:100%; text-align:center;">12 </div>
-              </div>
-            </div>
-            <div style="height:54px; width:160px; margin:1px; border-radius:4px; float:left; cursor:pointer;">
-
-            </div>
-          </div>
-
+    
 
 
 

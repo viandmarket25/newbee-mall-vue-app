@@ -29,7 +29,7 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
-    name: 'home',
+    name: 'root',
     redirect: '/home'
   },
   {

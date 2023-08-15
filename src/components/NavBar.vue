@@ -13,19 +13,19 @@
     <ul class="nav-list">
       <router-link tag="li" class="nav-list-item active" to="home">
         <i class="nbicon nblvsefenkaicankaoxianban-1"></i>
-        <span>首页</span>
+        <span>Home</span>
       </router-link>
       <router-link tag="li" class="nav-list-item" to="category">
         <i class="nbicon nbfenlei"></i>
-        <span>分类</span>
+        <span>Categories</span>
       </router-link>
       <router-link tag="li" class="nav-list-item" to="cart">
         <van-icon  name="shopping-cart-o" :info="!count ? '' : count" />
-        <span>购物车</span>
+        <span>Cart</span>
       </router-link>
       <router-link tag="li" class="nav-list-item" to="user">
         <i class="nbicon nblvsefenkaicankaoxianban-"></i>
-        <span>我的</span>
+        <span>Account</span>
       </router-link>
     </ul>
   </div>
@@ -83,7 +83,7 @@
             font-size: 22px;
           }
           span{
-            font-size: 12px;
+            font-size: 11px;
           }
           .van-icon-shopping-cart-o {
             margin: 0 auto;
