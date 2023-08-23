@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "commit": "echo \"Commit changes\"  && echo \"Adding files...\" && git add . && echo \"Commiting files...\" && git commit -m 'new commit' && echo \"Push changes...\" && git push origin dev --force && exit 1 "
   },
   "dependencies": {
     "axios": "^0.19.2",
