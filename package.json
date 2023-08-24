@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "vue-cli-service serve",
+    "dev": "vue-cli-service serve --port 7000",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "commit": "echo \"Commit changes\"  && echo \"Adding files...\" && git add . && echo \"Commiting files...\" && git commit -m 'new commit' && echo \"Push changes...\" && git push origin dev --force && exit 1 "
