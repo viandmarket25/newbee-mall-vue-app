@@ -10,40 +10,94 @@
 
 <template>
   <div class="product-detail">
-    <s-header :name="'商品详情'"></s-header>
+    <s-header style="font-size:14px;" :name="product.attributes.title"></s-header>
+
+
+   
+    
     <div class="detail-content">
-      <div class="detail-swipe-wrap">
-        <van-swipe class="my-swipe" indicator-color="#1baeae">
-          <van-swipe-item v-for="(item, index) in detail.goodsCarouselList" :key="index">
-            <img :src="prefix(item)" alt="">
-          </van-swipe-item>
-        </van-swipe>
-      </div>
-      <div class="product-info">
-        <div class="product-title">
-          {{ detail.goodsName }}
+
+
+      <div class="centered-position" style="width:100vw;">
+
+      <div class="product-detail-yop">
+        <div class="product-images" style="width:400px;  ">
+          <img
+            v-for="(image, index) in product.media"
+            :key="index"
+            :src="image.url"
+           
+            alt="Product Image"
+            @click="viewImage(image.url)"
+          />
         </div>
-        <div class="product-desc">免邮费 顺丰快递</div>
-        <div class="product-price">
-          <span>¥{{ detail.sellingPrice }}</span>
-          <!-- <span>库存203</span> -->
+        <div class="product-thumbnails" style="width:32px; ">
+          <img
+            v-for="(thumbnail, index) in product.media"
+            :key="index"
+            :src="thumbnail.url"
+            style="width:30px;"
+            alt="Product Thumbnail"
+            @click="viewImage(thumbnail.url)"
+          />
         </div>
+        <div class="product-info left-target-position" style="width:180px; padding:20px; border:0.4px solid #404040; text-align: left;">
+          <p>{{ product.attributes.title }}</p>
+          <p>{{ product.attributes.description }}</p>
+          <p>₦ {{ product.attributes.price }} </p>
+          <p> {{ product.attributes.stockCapacity }} in stock</p>
+
+          <hr/>
+            <div 
+
+          v-for="(variant, index) in product.variants"
+                :key="index" style="margin-bottom: 14px;"
+          
+          class="variant-selector">
+            <label>{{ variant.title }}</label>
+            <div class="variant-options">
+              <div
+                v-for="(option, opindex) in variant.options"
+                :key="opindex"
+                :class="`selected-variant`+{ 'selected-variant': variant.selectedOption === opindex }"
+                @click="selectVariant(option)"
+                style="font-size:10px;"
+              >
+                {{ option.title }}
+              </div>
+            </div>
+          </div>
+        
+        </div>
+
       </div>
+     
+    
+    
+    </div>
+
+
+
+
+
       <div class="product-intro">
         <ul>
-          <li>概述</li>
-          <li>参数</li>
-          <li>安装服务</li>
-          <li>常见问题</li>
+          <li>Overview</li>
+          <li>Parameters</li>
+          <li>Installation & Services</li>
+          <li>Frequently Asked Questions</li>
+
         </ul>
         <div class="product-content" v-html="detail.goodsDetailContent"></div>
       </div>
+      <div style="height:200px;"></div>
     </div>
     <van-goods-action>
-      <van-goods-action-icon icon="chat-o" text="客服" />
-      <van-goods-action-icon icon="cart-o" :info="!count ? '' : count" @click="goTo()" text="购物车"/>
-      <van-goods-action-button type="warning" @click="addCart" text="加入购物车" />
-      <van-goods-action-button type="danger" @click="goToCart" text="立即购买" />
+      <van-goods-action-icon icon="chat-o" text="Chat" />
+      <van-goods-action-icon icon="cart-o" :info="!count ? '' : count" @click="goTo()" text="Cart"/>
+      <input type="button" style="width:44%; border-radius:4px; margin-right:10px; height:40px; color:#404040; background:#fff; border:1px solid #000; " @click="addCart" value="Add to Cart" />
+      <input type="button" style="width:44%; border-radius:4px; height:40px; color:#fff; background:#404040; border:1px solid #000; " @click="goToCart" value="Buy Now" />
+     
     </van-goods-action>
   </div>
 </template>
@@ -53,9 +107,15 @@ import { getDetail } from '../service/good'
 import { addCart } from '../service/cart'
 import sHeader from '@/components/SimpleHeader'
 import { Toast } from 'vant'
+
+import productService from '@/service/products'
+
 export default {
   data() {
     return {
+      product:{},
+      variants: [], // Populate with variant options
+      selectedVariant: '', // Store selected variant
       detail: {
         goodsCarouselList: []
       }
@@ -65,11 +125,41 @@ export default {
     sHeader
   },
   async mounted() {
-    const { id } = this.$route.params
-    const { data } = await getDetail(id)
-    this.detail = data
+   // const { id } = this.$route.params
+   // const { data } = await getDetail(id)
+   // this.detail = data
+
+    await this.getProductDetails();
   },
   methods: {
+    viewImage(url) {
+      // Implement image viewer logic
+    },
+    selectVariant(option) {
+      alert(option)
+      this.selectedVariant = variant;
+    },
+    async getProductDetails(){
+      let id= this.$route.params.id;
+     
+
+      let result= await  productService.fetchProductDetails(id)
+      console.log(result)
+      if(result.data['resultCode']==1){
+        this.product=result.data['resultContent']
+
+        // ::::::::::: variant selection
+        for(let v=0; v<this.product.variants.length; v++){
+          this.products.variants[v]['selectedOption']=0;
+          alert( this.products.variants[v])
+
+        }
+       
+        
+      }
+    
+
+    },
     goBack() {
       this.$router.go(-1)
     },
@@ -160,7 +250,7 @@ export default {
             flex: 1;
             padding: 5px 0;
             text-align: center;
-            font-size: 15px;
+            font-size: 12px;
             border-right: 1px solid #999;
             box-sizing: border-box;
             &:last-child {
@@ -183,4 +273,80 @@ export default {
       background: linear-gradient(to right, #0dc3c3, #098888)
     }
   }
+
+
+
+
+.product-images img {
+  max-width: 100%;
+  cursor: pointer;
+}
+
+.product-info {
+  flex: 1;
+}
+
+.variant-selector label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.variant-options {
+  display: flex;
+  gap: 10px;
+}
+
+.variant-options div {
+  padding: 4px;
+ 
+  border: 1px solid #ccc;
+  border-radius: 0px;
+  cursor: pointer;
+}
+
+.selected-variant {
+  border: 2px solid #000;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.product-detail {
+  display: flex;
+  justify-content: center; /* Center the columns horizontally */
+  gap: 20px; /* Gap between columns */
+  padding: 20px;
+}
+
+.product-images,
+.product-thumbnails,
+.product-info {
+  float:left;
+  flex: 1; /* Equal width columns */
+  display: flex;
+  min-height:90vh;
+  margin:4px;
+  flex-direction: column;
+   /* Center content vertically */
+}
+
+.product-thumbnails {
+  width: 40px;
+  flex: 0 0 40px; /* Fixed width of 40px */
+}
+
+
+
+
+
+
+
+
+
 </style>

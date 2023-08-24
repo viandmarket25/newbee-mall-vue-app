@@ -1,16 +1,25 @@
-/***
+/****
  * 
  * 
- */
+ *****/
 import axios from 'axios';
 const BASE_URL = 'http://127.0.0.1:8001';
-/**
+/****
  * 
  * @param {*} cookieName 
  * @returns 
- */
+ *****/
 
-  
+let getCookie = (cookieName) => {
+    const name = cookieName + "=";
+    const cDecoded = decodeURIComponent(document.cookie); //to be careful
+    const cArr = cDecoded.split("; ");
+    let result;
+    cArr.forEach((val) => {
+      if (val.indexOf(name) === 0) result = val.substring(name.length);
+    });
+    return result;
+};
 let token
 if (typeof getCookie("siteAccessT") === 'undefined') {
   console.log('The variable is undefined.');
@@ -20,9 +29,9 @@ if (typeof getCookie("siteAccessT") === 'undefined') {
 console.log(token)
 
 
-function fetchRecommendedProducts(id) {
+function fetchRecommendedProducts() {
   //return axios.post(`${BASE_URL}/products/${id}`, data);
-  return axios.get(`${BASE_URL}/products/recommended`,{
+  return axios.get(`${BASE_URL}/api/v1/customer/products/recommended`,{
     headers: {
         "Authorization" : `Bearer ${token}`,
         "Access-Control-Allow-Origin": "*",
@@ -32,9 +41,9 @@ function fetchRecommendedProducts(id) {
   });
 }
 
-function fetchPopularProducts(id) {
+function fetchPopularProducts() {
     //return axios.post(`${BASE_URL}/products/${id}`, data);
-    return axios.get(`${BASE_URL}/products/popular`,{
+    return axios.get(`${BASE_URL}/api/v1/customer/products/popular`,{
       headers: {
           "Authorization" : `Bearer ${token}`,
           "Access-Control-Allow-Origin": "*",
@@ -44,9 +53,9 @@ function fetchPopularProducts(id) {
     });
 }
 
-function fetchLatestProducts(id) {
+function fetchLatestProducts() {
     //return axios.post(`${BASE_URL}/products/${id}`, data);
-    return axios.get(`${BASE_URL}/products/latest`,{
+    return axios.get(`${BASE_URL}/api/v1/customer/products/latest`,{
       headers: {
           "Authorization" : `Bearer ${token}`,
           "Access-Control-Allow-Origin": "*",
@@ -58,7 +67,7 @@ function fetchLatestProducts(id) {
 
 function fetchQueryProducts(query) {
     //return axios.post(`${BASE_URL}/products/${id}`, data);
-    return axios.get(`${BASE_URL}/products/latest/${query}`,{
+    return axios.get(`${BASE_URL}/api/v1/customer/products/search/${query}`,{
       headers: {
           "Authorization" : `Bearer ${token}`,
           "Access-Control-Allow-Origin": "*",
@@ -68,10 +77,24 @@ function fetchQueryProducts(query) {
     });
 }
 
+function fetchProductDetails(id) {
+  //return axios.post(`${BASE_URL}/products/${id}`, data);
+  return axios.get(`${BASE_URL}/api/v1/customer/products/${id}`,{
+    headers: {
+        "Authorization" : `Bearer ${token}`,
+        "Access-Control-Allow-Origin": "*",
+        "Content-Type":"application/json"
+        
+      },
+  });
+}
+
 
 
 export default {
     fetchRecommendedProducts,
     fetchPopularProducts,
-    fetchLatestProducts
+    fetchLatestProducts,
+    fetchQueryProducts,
+    fetchProductDetails
 };

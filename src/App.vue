@@ -279,10 +279,26 @@
    top:10px; left:10px; border-radius:14px;
 }
 
+
 .centered-position{
   align-items: center;
   vertical-align:middle;
   justify-content:center;
+  text-align:center;
+  display:flex;
+
+}
+.horizontal-center{
+    vertical-align:middle;
+  justify-content:center;
+  text-align:center;
+  display:flex;
+}
+
+.left-target-position{
+  align-items: left;
+  vertical-align:middle;
+  justify-content:left;
   text-align:center;
   display:flex;
 

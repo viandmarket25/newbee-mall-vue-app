@@ -58,46 +58,66 @@
 
 
 
+    <!--
 
     <div class="good" style="margin-bottom:20px; width:100%; min-height:100px; float:left; ">
+     
+     
       <header class="good-header">
 
               <div class="inner-square-" stylle="height:20px; width:4px; background:#ccc;"></div>
 
-        New Arrivals
+        Latest
         </header>
 
 
       <div class="good-box">
-        <div class="good-item" v-for="item in newGoodses" :key="item.goodsId" @click="goToDetail(item)">
-          <img :src="prefix(item.goodsCoverImg)" alt="">
+        <div class="good-item" v-for="(item,index) in featuredProducts.recommended.slice(0,4)" :key="index" @click="goToDetail(item.id)">
+          <img :src="item.mediaSource" alt="">
           <div class="good-desc">
-            <div class="title">{{ item.goodsName }}</div>
-            <div class="price">¥ {{ item.sellingPrice }}</div>
+            <div class="title" style="font-size:12px; color:#000;  ">{{ item.title }}</div>
+            <div class="price" style="font-size:13px; color:#000;  ">₦ {{ item.price }}</div>
           </div>
         </div>
       </div>
     </div>
+
+
+
+    <div class="good" style="margin-bottom:20px; width:100%; min-height:100px; float:left; ">
+            <div class="promotion-banner" style="margin-top:20px;">
+          <div class="promotion-content">
+            <h2 class="promotion-title">New arrivals alert! Get your closet summer-ready</h2>
+            <p class="promotion-description">Trendy shorts, light tops, fun accessories & more warm-weather staples are waiting.</p>
+            <button class="promotion-button">Shop Now</button>
+          </div>
+        </div>
+      </div>
+
+
     <div class="good" style="margin-bottom:20px; width:100%; min-height:100px; float:left;">
-      <header class="good-header">Popular Products</header>
+      <header class="good-header">Popular</header>
       <div class="good-box" style="min-height:100px;">
-        <div class="good-item" v-for="item in hots" :key="item.goodsId" @click="goToDetail(item)">
-          <img :src="prefix(item.goodsCoverImg)" alt="">
+        <div class="good-item" v-for="(item,index) in featuredProducts.recommended.slice(0,4)" :key="index" @click="goToDetail(item.id)">
+          <img :src="item.mediaSource" alt="">
           <div class="good-desc">
-            <div class="title">{{ item.goodsName }}</div>
-            <div class="price">¥ {{ item.sellingPrice }}</div>
+            <div class="title" style="font-size:12px; color:#000;  ">{{ item.title }}</div>
+            <div class="price" style="font-size:13px; color:#000;  ">₦ {{ item.price }}</div>
           </div>
         </div>
       </div>
     </div>
+
+  -->
+
     <div class="good" style="padding-bottom:100px; margin-bottom:20px; width:100%; min-height:100px; float:left;">
-      <header class="good-header">Latest Recommendations</header>
+      <header class="good-header">Recommendations</header>
       <div class="good-box">
-        <div class="good-item" v-for="item in recommends" :key="item.goodsId" @click="goToDetail(item)">
-          <img :src="prefix(item.goodsCoverImg)" alt="">
+        <div class="good-item" v-for="(item,index) in featuredProducts.recommended.slice(0,54)" :key="index" @click="goToDetail(item.id)">
+          <img :src="item.mediaSource" alt="">
           <div class="good-desc">
-            <div class="title">{{ item.goodsName }}</div>
-            <div class="price">¥ {{ item.sellingPrice }}</div>
+            <div class="title" style="font-size:12px; color:#000;  ">{{ item.title }}</div>
+            <div class="price" style="font-size:13px; color:#000;  ">₦ {{ item.price }}</div>
           </div>
         </div>
       </div>
@@ -107,10 +127,7 @@
 
 <script>
 import navBar from '@/components/NavBar'
-
 import SponsoredPage from '@/components/sponsored-page'
-
-
 import swiper from '@/components/Swiper'
 import { getHome } from '../service/home'
 import { getUserInfo } from '../service/user'
@@ -118,7 +135,7 @@ import { getLocal } from '@/common/js/utils'
 import { Toast } from 'vant'
 
 import Showcase from '@/components/showcase.vue';
-
+import productService from '@/service/products'
 
 export default {
   name: 'home',
@@ -129,6 +146,11 @@ export default {
   },
   data() {
     return {
+      featuredProducts:{
+        latest:[],
+        popular:[],
+        recommended:[]
+      },
       showcase:false,
           collections: [
 
@@ -323,6 +345,10 @@ export default {
     if (token) {
       this.isLogin = true
     }
+
+    // :::::::: get featured products
+
+    this.getFeaturedProducts();
     /*
     window.addEventListener('scroll', this.pageScroll)
     Toast.loading({
@@ -343,7 +369,23 @@ export default {
    // Toast.clear()
   },
   methods: {
-        filteredItems(index) {
+    async getFeaturedProducts(){
+
+      let recommended = await productService.fetchRecommendedProducts()
+      console.log(recommended)
+
+      if(recommended.data['resultCode']==1){
+        this.featuredProducts.recommended=recommended.data['resultContent']
+
+      }
+
+      await productService.fetchLatestProducts() 
+
+      await productService.fetchPopularProducts()
+
+
+    },
+    filteredItems(index) {
         // Custom filtering logic based on the index
         // Modify the condition below according to your requirements
         return index === 0 ? this.categories[index]['subcategories'] : [];
@@ -400,7 +442,7 @@ export default {
       scrollTop > 100 ? this.headerScroll = true : this.headerScroll = false
     },
     goToDetail(item) {
-      this.$router.push({ path: `product/${item.goodsId}` })
+      this.$router.push({ path: `product/${item}` })
     }
   }
 }
@@ -505,18 +547,18 @@ export default {
       flex-wrap: wrap;
       .good-item {
         box-sizing: border-box;
-        width: 50%;
-        border-bottom: 1PX solid #e9e9e9;
+        width: 25%;
+        border: 0.4PX solid #e9e9e9;
         padding: 10px 10px;
         img {
           display: block;
-          width: 120px;
+          width: 140px;
           margin: 0 auto;
         }
         .good-desc {
           text-align: center;
           font-size: 14px;
-          padding: 10px 0;
+          padding: 4px 0;
           .title {
             color: #222333;
           }
@@ -525,7 +567,7 @@ export default {
           }
         }
         &:nth-child(2n + 1) {
-          border-right: 1PX solid #e9e9e9;
+          border-right: 0PX solid #e9e9e9;
         }
       }
     }
@@ -588,7 +630,7 @@ export default {
   }
 
   .promotion-title {
-    font-size: 24px;
+    font-size: 20px;
 
     font-family: Satoshi-Bold;
 
@@ -1058,5 +1100,59 @@ export default {
 .title {
   font-size: 24px;
   margin: 0;
+}
+
+.pr-list-view {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.pr-list-item {
+  display: flex;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.pr-list-item-photo {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+}
+
+.pr-list-item-details {
+  padding: 10px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.pr-list-item-title {
+  font-size: 18px;
+  margin: 0;
+  color: #333;
+}
+
+.pr-list-item-price {
+  font-size: 16px;
+  color: #666;
+}
+
+.pr-list-item-tags {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+.pr-list-item-tag {
+  background-color: #f1f1f1;
+  color: #333;
+  font-size: 12px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  margin-right: 6px;
+  margin-bottom: 6px;
 }
 </style>
