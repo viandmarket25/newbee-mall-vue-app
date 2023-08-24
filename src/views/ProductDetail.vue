@@ -22,6 +22,11 @@
 
       <div class="product-detail-yop">
         <div class="product-images" style="width:400px;  ">
+          <img  
+            :src="selectedPhoto"    
+            alt="Product Image"
+           
+          />
           <img
             v-for="(image, index) in product.media"
             :key="index"
@@ -59,8 +64,8 @@
               <div
                 v-for="(option, opindex) in variant.options"
                 :key="opindex"
-                :class="`selected-variant`+{ 'selected-variant': variant.selectedOption === opindex }"
-                @click="selectVariant(option)"
+                :class="`selected-variant `+{ 'selected-variant': variant.selectedOption === opindex }"
+                @click="selectVariant(index, opindex)"
                 style="font-size:10px;"
               >
                 {{ option.title }}
@@ -113,6 +118,7 @@ import productService from '@/service/products'
 export default {
   data() {
     return {
+      selectedPhoto:'',
       product:{},
       variants: [], // Populate with variant options
       selectedVariant: '', // Store selected variant
@@ -134,10 +140,11 @@ export default {
   methods: {
     viewImage(url) {
       // Implement image viewer logic
+      this.selectedPhoto=url;
     },
-    selectVariant(option) {
+    selectVariant(variant,option) {
       alert(option)
-      this.selectedVariant = variant;
+      this.product.variants[variant].selectedOption = option;
     },
     async getProductDetails(){
       let id= this.$route.params.id;
@@ -150,10 +157,12 @@ export default {
 
         // ::::::::::: variant selection
         for(let v=0; v<this.product.variants.length; v++){
-          this.products.variants[v]['selectedOption']=0;
-          alert( this.products.variants[v])
+          this.product.variants[v]['selectedOption']=0;
+          //alert( JSON.stringify(this.product.variants[v]) )
 
         }
+
+        this.selectedPhoto=this.product.media[0].url
        
         
       }
@@ -293,7 +302,7 @@ export default {
 
 .variant-options {
   display: flex;
-  gap: 10px;
+  gap: 4px;
 }
 
 .variant-options div {
