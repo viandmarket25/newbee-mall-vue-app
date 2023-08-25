@@ -39,7 +39,6 @@
 
 
 
-    <!--
     <div class="category-list">
       <div v-for="item in categoryList" v-bind:key="item.categoryId">
         <img :src="item.imgUrl">
@@ -47,7 +46,7 @@
       </div>
     </div>
 
-    -->
+   
 
     <div class="category-list-">
        <Showcase v-if="showcase" />

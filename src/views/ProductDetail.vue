@@ -52,15 +52,46 @@
             @click="viewImage(thumbnail.url)"
           />
         </div>
-        <div class="product-info left-target-position" style="width:290px; padding:0px; border:0.4px solid #404040; text-align: left;">
+        <div class="product-info left-target-position" style="width:356px; padding:0px; background:#fbfbfb; border:0.4px solid #f1f1f1; text-align: left;">
           
           <div style=" padding:20px; " >
           
-          <p>{{ product.attributes.title }}</p>
+          <p>
+            {{ product.attributes.title }} 
+           
+          
+          
+          </p>
+          <p style="color:#666;">
+            4 Payments supported
+            <span style="padding:2px 8px; font-size:10px; border-radius:20px;  background:#d0f4de; color:#404040;">
+              Secure Pay ✔️
+            </span>
+          
+          
+          </p>
+          
           
           <p>₦ {{ product.attributes.price }} </p>
           <p>{{ product.attributes.description }}</p>
-          <p style="color:#404040;"> {{ product.attributes.stockCapacity }} in stock</p>
+    
+          <div               
+        
+                      style="display:flex; flex-wrap: wrap; gap:6px;"
+                    >
+
+                    <span style="padding:4px 10px; font-size:9px;  background:#404040; color:#fff;">
+                     🔥 HOT
+                    </span>
+                    <span style="padding:4px 10px; font-size:9px;  background:#404040; color:#fff;">
+                      2,000 SOLD
+                    </span>
+                    <span style="padding:4px 10px; font-size:9px;  background:#404040; color:#fff;">
+                      {{ product.attributes.stockCapacity }} IN STOCK
+                    </span>
+                   
+                  
+          </div>
 
 
           </div>
@@ -78,40 +109,58 @@
           </div>
 
 
-          <div v-if="product.variants" style="background-color: #000; height:0.4px;"></div>
+          <div v-if="product.variants" style="background-color: #f1f1f1; height:0.4px;"></div>
            
           <div v-if="product.variants"  style=" padding:20px; " >
           
           <div 
               v-for="(variant, index) in product.variants"
-
-              :v-if="variant.variationType=='image-text'"
-
                     :key="index" style="margin-bottom: 20px;"    
                 class="variant-selector">
                 <label >{{ variant.title }}</label>
                 <div style="margin-bottom: 14px; font-size:12px; " class="variant-options">
                  
-                  <div
-                  :v-model="variant.selectedOption"
+                  <label style="display:flex; flex-wrap: wrap; gap:6px;"
+                    v-if="variant.variationType===`image-text`" >
+                   
+                    <div               
+                      v-for="(option, opindex) in variant.options"
+                      :key="opindex"
+                      :class=" variant.selectedOption === opindex?`selected-variant-image`: `variant-option-image `"
+                      @click="selectVariant(index, opindex)"
+                      style="font-size:10px;"
+                    >
+                        <img         
+                          :src="option.mediaSource"
+                          style="width:60px; max-height:60px; margin-bottom: 0.4px; "
+                          alt="Product Thumbnail"
+                          @click="viewImage(option.mediaSource)"
+                        /><br/>
+                        <label> {{ option.title }} </label>
+                    </div>
 
-                  :v-if="variant.variationType=='image-text'"
+                  </label>
 
-                    v-for="(option, opindex) in variant.options"
-                    :key="opindex"
-                    :class=" variant.selectedOption === opindex?`selected-variant-image`: `variant-option `"
-                    @click="selectVariant(index, opindex)"
-                    style="font-size:10px;"
-                  >
-                  <img
-                  
-                    :src="option.mediaSource"
-                    style="width:60px; max-height:60px; margin-bottom: 0.4px; "
-                    alt="Product Thumbnail"
-                    @click="viewImage(option.mediaSource)"
-                  /><br/>
-                    {{ option.title }}
-                  </div>
+
+
+
+
+                  <label style="display:flex; flex-wrap: wrap; gap:6px;"
+                    v-if="variant.variationType===`text`" >
+                   
+                    <div
+                      
+                        v-for="(option, opindex) in variant.options"
+                        :key="opindex"
+                        :class=" variant.selectedOption === opindex?`selected-variant`: `variant-option `"
+                        @click="selectVariant(index, opindex)"
+                        style="font-size:10px;"
+                      >
+                      <label v-if="variant.variationType=='text'">  {{ option.title }} </label>
+                    </div>
+                  </label>
+                
+
 
 
                 </div>
@@ -119,29 +168,7 @@
 
 
 
-          <div 
-              v-for="(variant, index) in product.variants"
-
-                  :v-if="variant.variationType=='text'"
-                    :key="index" style="margin-bottom: 20px;"    
-                class="variant-selector">
-                <label >{{ variant.title }}</label>
-                <div style="margin-bottom: 14px; font-size:12px; " class="variant-options">
-                 
-                  <div
-                  :v-model="variant.selectedOption"
-                  :v-if="variant.variationType=='text'"
-                    v-for="(option, opindex) in variant.options"
-                    :key="opindex"
-                    :class=" variant.selectedOption === opindex?`selected-variant`: `variant-option `"
-                    @click="selectVariant(index, opindex)"
-                    style="font-size:10px;"
-                  >
-                    {{ option.title }}
-                  </div>
-                </div>
-            </div>
-
+     
 
 
 
@@ -153,14 +180,14 @@
           </div>
 
 
-           <div style="background-color: #000; height:0.4px;"></div>
+           <div style="background-color: #f1f1f1; height:0.4px;"></div>
 
 
           <div style=" padding:20px; " >
             <div>
                         
               <div class="collapsible">
-                <p @click="toggleShipping" class="header-text-de" style=" cursor:pointer;  font-size:11px; ">SHIPPING</p>
+                <p @click="toggleShipping" class="header-text-de" style=" cursor:pointer;  font-size:11px; ">🚀 DELIVERY</p>
                 <transition name="slide-fade" mode="out-in">
                   <div v-if="showShipping">
                     <p>We provide fast and reliable shipping options to ensure your orders are delivered to you promptly and securely.</p>
@@ -173,7 +200,7 @@
               </div>
               
               <div class="collapsible">
-                <p @click="toggleReturns"  class="header-text-de"  style=" cursor:pointer;  font-size:11px; ">RETURNS</p>
+                <label @click="toggleReturns"  class="header-text-de"  style=" cursor:pointer;  font-size:11px; ">💰 RETURNS</label>
                 <transition name="slide-fade" mode="out-in">
                   <div v-if="showReturns">
                     <p>We want you to be completely satisfied with your purchase. If you're not happy with your order, you can return the items within 30 days of receipt.</p>
@@ -185,7 +212,7 @@
               </div>
               
               <div class="collapsible">
-                <p @click="toggleDelivery"  class="header-text-de"  style=" cursor:pointer; font-size:11px; ">DELIVERY</p>
+                <label @click="toggleDelivery"  class="header-text-de"  style=" cursor:pointer; font-size:11px; ">📦 DELIVERY</label>
                 <transition name="slide-fade" mode="out-in">
                   <div v-if="showDelivery">
                     <p>Our dedicated delivery team ensures that your orders are carefully packaged and promptly delivered to your preferred address.</p>
@@ -196,6 +223,41 @@
                   </div>
                 </transition>
               </div>
+
+               <div class="collapsible">
+                <p @click="toggleReviews" class="header-text-de" style=" cursor:pointer;  font-size:11px; ">💬 REVIEWS</p>
+                <transition name="slide-fade" mode="out-in">
+                  <div v-if="showReviews">
+                    <div class="product-reviews">
+                      <div style="background-color: #f1f1f1; height:0.4px;"></div>
+
+                      <div v-for="(review, index) in reviews" :key="index" class="review">
+                        <div class="review-header">
+                          <div class="rating" style="display:flex; flex-wrap: wrap; gap:2px;"  >
+                            <div v-for="star in review.rating" :key="star" class="star" :class="{ 'filled-star': star <= review.rating }"> </div>
+                          </div>
+                         
+                        </div>
+                        <div class="review-header">
+                          
+                          <div class="review-info">
+                            <span style="font-size:12px; font-weight:600;  " class="username">{{ review.username }}</span>
+                            <span style="font-size:12px;  " class="date-time">{{ review.dateTime }}</span>
+                          </div>
+                        </div>
+
+
+                        <div style="font-size:12px;  " class="review-comment">{{ review.comment }}</div>
+                      </div>
+                    </div>
+                 
+                  </div>
+                </transition>
+              </div>
+
+
+
+
             </div>
 
           </div>
@@ -224,13 +286,7 @@
 
     <div style="height:200px;"></div>
       <div class="product-intro">
-        <ul>
-          <li>Overview</li>
-          <li>Parameters</li>
-          <li>Installation & Services</li>
-          <li>Frequently Asked Questions</li>
-
-        </ul>
+     
         <div class="product-content" v-html="detail.goodsDetailContent"></div>
       </div>
       <div style="height:200px;"></div>
@@ -254,10 +310,70 @@ import { Toast } from 'vant'
 import productService from '@/service/products'
 
 export default {
+  computed: {
+  selectedOptions() {
+    const selectedOptions = {};
+    for (const variant of this.product.variants) {
+      selectedOptions[variant.title] = variant.options.find(option => option.selected);
+    }
+    return selectedOptions;
+  }
+},
+  watch: {
+  'product.variants': {
+    deep: true,
+    handler: function(newAttributes, oldAttributes) {
+      //alert('select!')
+      // Handle attribute updates
+      //this.editAttributes();
+    }
+  },
+  },
   data() {
     return {
+      reviews: [
+        {
+          rating: 5,
+          username: 'John Doe',
+          dateTime: '2023-08-15 10:30 AM',
+          comment: 'Excellent product! I love it. 🎉🥳'
+        },
+        {
+          rating: 4,
+          username: 'Jane Smith',
+          dateTime: '2023-08-14 03:45 PM',
+          comment: 'Great quality and value for the price.😀'
+        },
+        {
+        rating: 4,
+          username: 'Michael Adams',
+          dateTime: '2023-08-14 03:45 PM',
+          comment: 'The design is great and its stylish. Only wish the price was a bit lower.'
+        },
+        {
+          rating: 3,
+          username: 'Emily Roberts',
+          dateTime: '2023-08-13 08:15 AM',
+          comment: 'Decent shirt, but the color faded after a few washes.'
+        },
+        {
+          rating: 5,
+          username: 'Daniel Lee',
+          dateTime: '2023-08-12 06:00 PM',
+          comment: 'Impressive quality and fast delivery. Highly recommended!'
+        },
+        {
+          rating: 2,
+          username: 'Jennifer Brown',
+          dateTime: '2023-08-11 11:30 AM',
+          comment: 'Not as expected. The stitching came undone after wearing it only a couple of times.'
+        },
+        // Add more review objects here...
+      ],
       quantity: 1,// Initial quantity value
       showShipping: false,
+       showDetails: false,
+        showReviews: false,
       showReturns: false,
       showDelivery: false,
       selectedPhoto:'',
@@ -288,6 +404,9 @@ export default {
         this.quantity--;
       }
     },
+      toggleReviews() {
+      this.showReviews = !this.showReviews;
+    },
     toggleShipping() {
       this.showShipping = !this.showShipping;
     },
@@ -304,6 +423,8 @@ export default {
     selectVariant(variantIndex,option) {
 
       this.product.variants[variantIndex].selectedOption = option;
+
+      this.product=  this.product
 
      // alert("opt"+option)
      //  alert("vopt"+this.product.variants[variantIndex].selectedOption)
@@ -471,12 +592,22 @@ export default {
   flex-wrap: wrap; /* Allow flex items to wrap onto multiple lines */
    /* Add some spacing between flex items */
 }
+.variant-option-image {
+  padding: 4px;
+  padding-left:4px;
+  padding-right:4px;
 
+ 
+  border: 1px solid #ccc;
+  border-radius: 0px;
+  cursor: pointer;
+}
 
 .variant-option {
-  padding: 4px;
+  line-height:20px;
   padding-left:20px;
   padding-right:20px;
+  height:20px;
 
  
   border: 1px solid #ccc;
@@ -492,10 +623,10 @@ export default {
 
 .selected-variant-image {
   padding: 4px;
-  padding-left:20px;
-  padding-right:20px;
+  padding-left:4px;
+  padding-right:4px;
  
-  border: 1.6px solid #404040;
+  border: 1.1px solid #404040;
   color:#000;
   border-radius: 0px;
  cursor: pointer;
@@ -503,12 +634,13 @@ export default {
 
 
 .selected-variant {
-  padding: 4px;
+  line-height:20px;
   padding-left:20px;
   padding-right:20px;
+  height:20px;
 
   
-  border: 1.6px solid #404040;
+  border: 1.1px solid #404040;
   color:#000;
  border-radius: 0px;
  cursor: pointer;
@@ -604,5 +736,62 @@ h2 {
   border: 1px solid #ccc;
   width: 40px;
   text-align: center;
+}
+
+
+.product-reviews {
+  margin-top:10px;
+  padding: 2px;
+}
+
+.review {
+  margin-bottom: 10px;
+ 
+  padding: 4px;
+  border-radius: 4px;
+ 
+}
+
+.review-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.rating {
+  font-size: 12px;
+}
+
+.star {
+  background: #404040;
+  height:4px; width:16px;
+  margin:1px;
+  border-radius: 1.2px;
+}
+
+.filled-star {
+  background: #404040;
+  height:4px; width:16px;
+   margin:1px;
+   border-radius: 1.2px;
+}
+
+.review-info {
+  font-size: 11px;
+  color: #555;
+}
+
+.username {
+  margin-right: 10px;
+}
+
+.date-time {
+  opacity: 0.7;
+}
+
+.review-comment {
+  font-size: 16px;
+  color: #333;
 }
 </style>
