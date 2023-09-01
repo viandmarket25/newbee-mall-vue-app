@@ -256,6 +256,25 @@
                           </div>
                          
                         </div>
+
+                      
+                        <div class="review-header">
+                          
+                          <div class="image-grid">
+                            <div class="image-item">
+                                <img :src="product.attributes.mediaSource" alt="Image 1">
+                            </div>
+                            <div class="image-item">
+                                <img :src="product.attributes.mediaSource" alt="Image 2">
+                            </div>
+                            <div class="image-item">
+                                <img :src="product.attributes.mediaSource" alt="Image 3">
+                            </div>
+                            <!-- Add more image items as needed -->
+                          </div>
+                        </div>
+
+
                         <div class="review-header">
                           
                           <div class="review-info">
@@ -320,6 +339,10 @@
 </template>
 
 <script>
+
+
+import { productDetailStore } from "@/pinia-store/product-detail.js";
+
 import { getDetail } from '../service/good'
 import { addCart } from '../service/cart'
 import sHeader from '@/components/SimpleHeader'
@@ -327,7 +350,15 @@ import { Toast } from 'vant'
 
 import productService from '@/service/products'
 
+
+
 export default {
+  setup(){
+   // const productDetailStateStore = new productDetailStore();
+
+
+
+  },
   computed: {
   selectedOptions(optionIndex) {
       const selectedOptions = {};
@@ -469,6 +500,8 @@ export default {
       console.log(result)
       if(result.data['resultCode']==1){
         this.product=result.data['resultContent']
+
+       // productDetailStateStore.setVariants(this.product.variants)
 
         // ::::::::::: variant selection
         for(let v=0; v<this.product.variants.length; v++){
@@ -847,4 +880,32 @@ h2 {
 .product-image-tr.slide-up {
    opacity: 1;
 }
+
+/* Style the image grid container */
+.image-grid {
+  
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    max-width: 280px;
+    justify-content: flex-start; /* Align items to the left */
+    padding: 0px;
+}
+
+/* Style each image item */
+.image-item {
+    flex: 0 0 calc(20.33% - 6px); /* Adjust width and margin as needed */
+    max-width: calc(20.33% - 6px); /* Adjust width and margin as needed */
+    padding: 2px;
+    background-color: #fff;
+
+}
+
+/* Style images to fit the container */
+.image-item img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
 </style>

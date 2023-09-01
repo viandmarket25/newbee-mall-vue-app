@@ -74,7 +74,8 @@
           
           <div class="good-desc">
             <div class="title" style="font-size:12px; color:#000;  ">{{ item.title }}</div>
-            <div class="price" style="font-size:11px; color:#e85d04;  ">₦ <strong style="font-size: 14px;"> {{ item.price }}</strong></div>
+            <div class="price" style="font-size:11px; color:#e85d04;  ">₦<strong style="font-size: 14px;"> {{ item.price }}</strong></div>
+         
           </div>
           
         </div>
