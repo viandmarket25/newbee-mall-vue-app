@@ -258,6 +258,17 @@
                         </div>
 
                       
+                  
+
+
+                        <div class="review-header">
+                          
+                          <div class="review-info">
+                            <span style="font-size:12px; font-weight:600;  " class="username">{{ review.username }}</span>
+                            <span style="font-size:12px;  " class="date-time">{{ review.dateTime }}</span>
+                          </div>
+                        </div>
+
                         <div class="review-header">
                           
                           <div class="image-grid">
@@ -271,15 +282,6 @@
                                 <img :src="product.attributes.mediaSource" alt="Image 3">
                             </div>
                             <!-- Add more image items as needed -->
-                          </div>
-                        </div>
-
-
-                        <div class="review-header">
-                          
-                          <div class="review-info">
-                            <span style="font-size:12px; font-weight:600;  " class="username">{{ review.username }}</span>
-                            <span style="font-size:12px;  " class="date-time">{{ review.dateTime }}</span>
                           </div>
                         </div>
 
