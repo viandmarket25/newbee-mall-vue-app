@@ -28,7 +28,7 @@ export default {
       slideWidth: 540, // Adjust this value as needed
 
       images: [
-             'https://static.zara.net/photos///2023/I/0/1/p/2712/816/251/2/w/380/2712816251_2_1_1.jpg?ts=1689781866538',
+             'https://static.coupangcdn.com/la/cmg_paperboy/image/1693547188565/C1_PC1.jpg',
              'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/store-card-40-ipad-pro-202210?wid=800&hei=1000&fmt=p-jpg&qlt=95&.v=1667423474414',
              'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/store-card-40-watch-s8-202303?wid=800&hei=1000&fmt=p-jpg&qlt=95&.v=1677224522003',
              'https://static.zara.net/photos///2023/I/0/1/p/9043/023/712/2/w/800/9043023712_6_1_1.jpg?ts=1691596381915',
@@ -131,7 +131,7 @@ export default {
   padding: 4px;
   background: #f1f1f1;
   left: 10px;
-  z-index: 9999;
+  z-index: 99;
 }
 
 .next-button {

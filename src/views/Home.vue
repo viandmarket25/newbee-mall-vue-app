@@ -60,6 +60,29 @@
 
 
 
+    <div class="good" style="padding-bottom:10px; margin-bottom:20px; width:100%; min-height:100px; float:left;">
+     
+      <div class="good-box">
+        
+        <div class="good-item" v-for="(item,index) in sponsoredPosts" :key="index" @click="goToDetail(item.id)">
+          
+          
+       
+          <div class="good-desc">
+            <div class="title" style="font-size:12px; color:#000;  ">{{ item.brand }}
+               <div
+              v-if="index==3"
+              style="font-size:10px;" class="spo-el-tag spo-el-tag-primary">Hotels</div> </div>
+           
+            <div class="price" style="font-size:11px; color:#666;  "><strong style="font-size: 14px;"> {{item.product}} hot</strong></div>
+         
+          </div>
+          
+        </div>
+        
+      </div>
+    </div>
+
 
 
 
@@ -82,6 +105,10 @@
         
       </div>
     </div>
+
+
+
+
   </div>
 </template>
 
@@ -153,99 +180,7 @@ export default {
       ],
             subCategoryVisible:false,
             categoryIndex:0,
-            categories: [
-        {
-          "id": 1,
-          "name": "Men's Fashion",
-          "showSubcategories": false,
-          "subcategories": [
-            { "id": 11, "name": "Clothing" },
-            { "id": 12, "name": "Shoes" },
-            { "id": 13, "name": "Accessories" },
-            { "id": 14, "name": "Bags" },
-            { "id": 15, "name": "Watches" },
-            { "id": 16, "name": "Grooming" }
-          ]
-        },
-        {
-          "id": 2,
-          "name": "Women's Fashion",
-          "showSubcategories": false,
-          "subcategories": [
-            { "id": 21, "name": "Clothing" },
-            { "id": 22, "name": "Shoes" },
-            { "id": 23, "name": "Bags" },
-            { "id": 24, "name": "Accessories" },
-            { "id": 25, "name": "Jewelry" },
-            { "id": 26, "name": "Beauty" }
-          ]
-        },
-        {
-          "id": 3,
-          "name": "Kids' Fashion",
-          "showSubcategories": false,
-          "subcategories": [
-            { "id": 31, "name": "Boys' Clothing" },
-            { "id": 32, "name": "Girls' Clothing" },
-            { "id": 33, "name": "Shoes" },
-            { "id": 34, "name": "Accessories" },
-            { "id": 35, "name": "Toys" },
-            { "id": 36, "name": "School Uniforms" }
-          ]
-        },
-        {
-          "id": 4,
-          "name": "Footwear",
-          "showSubcategories": false,
-          "subcategories": [
-            { "id": 41, "name": "Men's Shoes" },
-            { "id": 42, "name": "Women's Shoes" },
-            { "id": 43, "name": "Kids' Shoes" },
-            { "id": 44, "name": "Athletic Shoes" },
-            { "id": 45, "name": "Boots" },
-            { "id": 46, "name": "Sandals" }
-          ]
-        },
-        {
-          "id": 5,
-          "name": "Accessories",
-          "showSubcategories": false,
-          "subcategories": [
-            { "id": 51, "name": "Hats" },
-            { "id": 52, "name": "Scarves & Wraps" },
-            { "id": 53, "name": "Belts" },
-            { "id": 54, "name": "Gloves" },
-            { "id": 55, "name": "Sunglasses" },
-            { "id": 56, "name": "Wallets" }
-          ]
-        },
-        {
-          "id": 6,
-          "name": "Sportswear",
-          "showSubcategories": false,
-          "subcategories": [
-            { "id": 61, "name": "Men's Sportswear" },
-            { "id": 62, "name": "Women's Sportswear" },
-            { "id": 63, "name": "Kids' Sportswear" },
-            { "id": 64, "name": "Athletic Shoes" },
-            { "id": 65, "name": "Fitness Accessories" },
-            { "id": 66, "name": "Sports Equipment" }
-          ]
-        },
-        {
-          "id": 7,
-          "name": "Maternity",
-          "showSubcategories": false,
-          "subcategories": [
-            { "id": 71, "name": "Maternity Clothing" },
-            { "id": 72, "name": "Maternity Accessories" },
-            { "id": 73, "name": "Nursing & Feeding" },
-            { "id": 74, "name": "Baby Gear" }
-          ]
-        }
-        // Add more fashion categories and subcategories as needed
-      ]
-      ,
+       
             token:'',
             products:[],
       swiperList: [],
@@ -254,6 +189,58 @@ export default {
       hots: [],
       newGoodses: [],
       recommends: [],
+      sponsoredPosts: [
+  {
+    brand: 'Nike',
+    product: 'Air Max 270',
+    imgUrl: 'https://images.asos-media.com/products/collusion-x018-unisex-y2k-wide-leg-skater-jeans-with-branding-in-raw-denim/204673736-1-midblue?$n_960w$&wid=952&fit=constrain',
+    description: 'Introducing the all-new Nike Air Max 270 sneakers. Grab yours now!',
+    link: '/products/nike-air-max-270'
+  },
+  {
+    brand: 'Apple',
+    product: 'iPhone 13 Pro',
+    imgUrl: 'https://images.asos-media.com/products/collusion-x018-unisex-y2k-wide-leg-skater-jeans-with-branding-in-raw-denim/204673736-1-midblue?$n_960w$&wid=952&fit=constrain',
+    description: 'Experience the latest iPhone 13 Pro with advanced features and performance.',
+    link: '/products/iphone-13-pro'
+  },
+  {
+    brand: 'Samsung',
+    product: 'Galaxy Watch 4',
+    imgUrl: 'https://images.asos-media.com/products/collusion-x018-unisex-y2k-wide-leg-skater-jeans-with-branding-in-raw-denim/204673736-1-midblue?$n_960w$&wid=952&fit=constrain',
+    description: 'Stay connected and track your fitness with the Samsung Galaxy Watch 4.',
+    link: '/products/samsung-galaxy-watch-4'
+  },
+  {
+    brand: 'Adidas',
+    product: 'Ultra Boost',
+    imgUrl: 'https://images.asos-media.com/products/collusion-x018-unisex-y2k-wide-leg-skater-jeans-with-branding-in-raw-denim/204673736-1-midblue?$n_960w$&wid=952&fit=constrain',
+    description: 'Get ready to boost your running experience with Adidas Ultra Boost shoes.',
+    link: '/products/adidas-ultra-boost'
+  },
+  {
+    brand: 'Apple',
+    product: 'iPhone 13 Pro',
+    imgUrl: 'https://images.asos-media.com/products/collusion-x018-unisex-y2k-wide-leg-skater-jeans-with-branding-in-raw-denim/204673736-1-midblue?$n_960w$&wid=952&fit=constrain',
+    description: 'Experience the latest iPhone 13 Pro with advanced features and performance.',
+    link: '/products/iphone-13-pro'
+  },
+  {
+    brand: 'Samsung',
+    product: 'Galaxy Watch 4',
+    imgUrl: 'https://images.asos-media.com/products/collusion-x018-unisex-y2k-wide-leg-skater-jeans-with-branding-in-raw-denim/204673736-1-midblue?$n_960w$&wid=952&fit=constrain',
+    description: 'Stay connected and track your fitness with the Samsung Galaxy Watch 4.',
+    link: '/products/samsung-galaxy-watch-4'
+  },
+  {
+    brand: 'Adidas',
+    product: 'Ultra Boost',
+    imgUrl: 'https://images.asos-media.com/products/collusion-x018-unisex-y2k-wide-leg-skater-jeans-with-branding-in-raw-denim/204673736-1-midblue?$n_960w$&wid=952&fit=constrain',
+    description: 'Get ready to boost your running experience with Adidas Ultra Boost shoes.',
+    link: '/products/adidas-ultra-boost'
+  }
+]
+,
       categoryList:[
   {
     name: 'Hotels',
@@ -1174,4 +1161,38 @@ export default {
   margin-right: 6px;
   margin-bottom: 6px;
 }
+
+.spo-el-tag {
+  display: inline-block;
+  padding: 1px 3px;
+  font-size: 10px;
+  border-radius: 2px;
+  margin-right: 10px;
+}
+
+.spo-el-tag-primary {
+  background-color: #404040;
+  color: #fff;
+}
+
+.spo-el-tag-secondary {
+  background-color: #6c757d;
+  color: #fff;
+}
+
+.spo-el-tag-success {
+  background-color: #28a745;
+  color: #fff;
+}
+
+.spo-el-tag-warning {
+  background-color: #ffc107;
+  color: #000;
+}
+
+.spo-el-tag-danger {
+  background-color: #dc3545;
+  color: #fff;
+}
+
 </style>

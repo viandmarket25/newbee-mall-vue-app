@@ -425,7 +425,7 @@
 .product-category-menu:hover{
   padding-left:10%;
 
-  background:#fff1e6;
+  background:#f1f1f1;
   width:90%; font-family:Montserrat-Medium; cursor:pointer; height:24px; font-size:11px; line-height:24px; text-align:left; margin-left:0%;
   transition: 100ms all;
   transition-delay: 100ms;
@@ -439,7 +439,7 @@
 }
 .sub-category-menu:hover{
   padding-left:8%;
-  background:#fff1e6;
+  background:#f1f1f1;
   width:100%; font-family:Montserrat-Medium; cursor:pointer; height:24px; font-size:10px; line-height:24px; text-align:left; margin-left:0%;
   transition: 50ms all;
   transition-delay: 50ms;

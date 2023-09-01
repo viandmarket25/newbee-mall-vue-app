@@ -64,7 +64,7 @@
           -->
 
         </div>
-        <div v-show="subCategoryViewActive"   style="width:100%; height:560px; float:left; overflow:hidden;  z-index: 1; position:absolute; ">
+        <div v-show="subCategoryViewActive"   style="width:100%; height:560px; float:left; overflow:hidden;  z-index:99; position:absolute; ">
           <div @mouseover="hoverCategoryView(1)" @mouseleave="hoverCategoryView(0)" style="width:98%; height:80%; margin-top:40px; float:left; background:#fcfcfc; box-shadow:0px 0px 0px 1px #f1f1f1; overflow:hidden; position:absolute; ">
             <div style="width:100%; height:50px;  float:left;  ">
                 <div style="width:90%; font-family:Montserrat-Bold; border-bottom:1px solid #f1f1f1; height:50px; font-size:16px; line-height:50px; text-align:left; margin-left:6.2%; " >{{activeProductCategory.title}}</div>
