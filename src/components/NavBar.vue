@@ -13,6 +13,9 @@
     <ul class="nav-list">
       <router-link tag="li" class="nav-list-item active" to="home">
         <i class="nbicon nblvsefenkaicankaoxianban-1"></i>
+        
+   
+   
         <span>Home</span>
       </router-link>
       <router-link tag="li" class="nav-list-item" to="category">

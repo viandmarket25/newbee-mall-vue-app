@@ -41,7 +41,13 @@
 
     <div class="category-list">
       <div v-for="item in categoryList" v-bind:key="item.categoryId">
-        <img :src="item.imgUrl">
+       <div style="width:100%;">
+        <span
+             style="width: 46px; height: 46px;  text-align: center;  "
+             v-html="item.svg"></span>
+             </div>
+            
+
         <span>{{item.name}}</span>
       </div>
     </div>
@@ -57,68 +63,22 @@
 
 
 
-    <!--
-
-    <div class="good" style="margin-bottom:20px; width:100%; min-height:100px; float:left; ">
-     
-     
-      <header class="good-header">
-
-              <div class="inner-square-" stylle="height:20px; width:4px; background:#ccc;"></div>
-
-        Latest
-        </header>
-
-
-      <div class="good-box">
-        <div class="good-item" v-for="(item,index) in featuredProducts.recommended.slice(0,4)" :key="index" @click="goToDetail(item.id)">
-          <img :src="item.mediaSource" alt="">
-          <div class="good-desc">
-            <div class="title" style="font-size:12px; color:#000;  ">{{ item.title }}</div>
-            <div class="price" style="font-size:13px; color:#000;  ">₦ {{ item.price }}</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-
-
-    <div class="good" style="margin-bottom:20px; width:100%; min-height:100px; float:left; ">
-            <div class="promotion-banner" style="margin-top:20px;">
-          <div class="promotion-content">
-            <h2 class="promotion-title">New arrivals alert! Get your closet summer-ready</h2>
-            <p class="promotion-description">Trendy shorts, light tops, fun accessories & more warm-weather staples are waiting.</p>
-            <button class="promotion-button">Shop Now</button>
-          </div>
-        </div>
-      </div>
-
-
-    <div class="good" style="margin-bottom:20px; width:100%; min-height:100px; float:left;">
-      <header class="good-header">Popular</header>
-      <div class="good-box" style="min-height:100px;">
-        <div class="good-item" v-for="(item,index) in featuredProducts.recommended.slice(0,4)" :key="index" @click="goToDetail(item.id)">
-          <img :src="item.mediaSource" alt="">
-          <div class="good-desc">
-            <div class="title" style="font-size:12px; color:#000;  ">{{ item.title }}</div>
-            <div class="price" style="font-size:13px; color:#000;  ">₦ {{ item.price }}</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-  -->
-
     <div class="good" style="padding-bottom:100px; margin-bottom:20px; width:100%; min-height:100px; float:left;">
       <header class="good-header">Recommendations</header>
       <div class="good-box">
+        
         <div class="good-item" v-for="(item,index) in featuredProducts.recommended.slice(0,54)" :key="index" @click="goToDetail(item.id)">
+          
+          
           <img :src="item.mediaSource" alt="">
+          
           <div class="good-desc">
             <div class="title" style="font-size:12px; color:#000;  ">{{ item.title }}</div>
-            <div class="price" style="font-size:13px; color:#000;  ">₦ {{ item.price }}</div>
+            <div class="price" style="font-size:11px; color:#e85d04;  ">₦ <strong style="font-size: 14px;"> {{ item.price }}</strong></div>
           </div>
+          
         </div>
+        
       </div>
     </div>
   </div>
@@ -293,49 +253,92 @@ export default {
       hots: [],
       newGoodses: [],
       recommends: [],
-      categoryList: [
-          {
-            name: '新蜂超市',
-            imgUrl: '//s.weituibao.com/1583585285461/cs.png',
-            categoryId: 100001
-          }, {
-            name: '新蜂服饰',
-            imgUrl: '//s.weituibao.com/1583585285468/fs.png',
-            categoryId: 100003
-          }, {
-            name: '全球购',
-            imgUrl: '//s.weituibao.com/1583585285470/qq.png',
-            categoryId: 100002
-          }, {
-            name: '新蜂生鲜',
-            imgUrl: '//s.weituibao.com/1583585285472/sx.png',
-            categoryId: 100004
-          }, {
-            name: '新蜂到家',
-            imgUrl: '//s.weituibao.com/1583585285467/dj.png',
-            categoryId: 100005
-          }, {
-            name: '充值缴费',
-            imgUrl: '//s.weituibao.com/1583585285465/cz.png',
-            categoryId: 100006
-          }, {
-            name: '9.9元拼',
-            imgUrl: '//s.weituibao.com/1583585285469/pt.png',
-            categoryId: 100007
-          }, {
-            name: '领劵',
-            imgUrl: '//s.weituibao.com/1583585285468/juan.png',
-            categoryId: 100008
-          }, {
-            name: '省钱',
-            imgUrl: '//s.weituibao.com/1583585285471/sq.png',
-            categoryId: 100009
-          }, {
-            name: '全部',
-            imgUrl: '//s.weituibao.com/1583585285470/qb.png',
-            categoryId: 100010
-          }
-      ],
+      categoryList:[
+  {
+    name: 'Hotels',
+    imgUrl: '//s.weituibao.com/1583585285461/cs.png',
+    categoryId: 100001,
+    svg:`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+  <path d="M19.006 3.705a.75.75 0 00-.512-1.41L6 6.838V3a.75.75 0 00-.75-.75h-1.5A.75.75 0 003 3v4.93l-1.006.365a.75.75 0 00.512 1.41l16.5-6z" />
+  <path fill-rule="evenodd" d="M3.019 11.115L18 5.667V9.09l4.006 1.456a.75.75 0 11-.512 1.41l-.494-.18v8.475h.75a.75.75 0 010 1.5H2.25a.75.75 0 010-1.5H3v-9.129l.019-.006zM18 20.25v-9.565l1.5.545v9.02H18zm-9-6a.75.75 0 00-.75.75v4.5c0 .414.336.75.75.75h3a.75.75 0 00.75-.75V15a.75.75 0 00-.75-.75H9z" clip-rule="evenodd" />
+</svg>
+
+
+    `
+  },
+  
+
+  {
+    name: 'Restaurants',
+    imgUrl: '//s.weituibao.com/1583585285472/sx.png',
+    categoryId: 100004,
+    svg:`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+  <path d="M5.223 2.25c-.497 0-.974.198-1.325.55l-1.3 1.298A3.75 3.75 0 007.5 9.75c.627.47 1.406.75 2.25.75.844 0 1.624-.28 2.25-.75.626.47 1.406.75 2.25.75.844 0 1.623-.28 2.25-.75a3.75 3.75 0 004.902-5.652l-1.3-1.299a1.875 1.875 0 00-1.325-.549H5.223z" />
+  <path fill-rule="evenodd" d="M3 20.25v-8.755c1.42.674 3.08.673 4.5 0A5.234 5.234 0 009.75 12c.804 0 1.568-.182 2.25-.506a5.234 5.234 0 002.25.506c.804 0 1.567-.182 2.25-.506 1.42.674 3.08.675 4.5.001v8.755h.75a.75.75 0 010 1.5H2.25a.75.75 0 010-1.5H3zm3-6a.75.75 0 01.75-.75h3a.75.75 0 01.75.75v3a.75.75 0 01-.75.75h-3a.75.75 0 01-.75-.75v-3zm8.25-.75a.75.75 0 00-.75.75v5.25c0 .414.336.75.75.75h3a.75.75 0 00.75-.75v-5.25a.75.75 0 00-.75-.75h-3z" clip-rule="evenodd" />
+</svg>
+`
+  },
+  {
+    name: 'Quick Delivery',
+    imgUrl: '//s.weituibao.com/1583585285467/dj.png',
+    categoryId: 100005,
+    svg:`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+  <path fill-rule="evenodd" d="M9.315 7.584C12.195 3.883 16.695 1.5 21.75 1.5a.75.75 0 01.75.75c0 5.056-2.383 9.555-6.084 12.436A6.75 6.75 0 019.75 22.5a.75.75 0 01-.75-.75v-4.131A15.838 15.838 0 016.382 15H2.25a.75.75 0 01-.75-.75 6.75 6.75 0 017.815-6.666zM15 6.75a2.25 2.25 0 100 4.5 2.25 2.25 0 000-4.5z" clip-rule="evenodd" />
+  <path d="M5.26 17.242a.75.75 0 10-.897-1.203 5.243 5.243 0 00-2.05 5.022.75.75 0 00.625.627 5.243 5.243 0 005.022-2.051.75.75 0 10-1.202-.897 3.744 3.744 0 01-3.008 1.51c0-1.23.592-2.323 1.51-3.008z" />
+</svg>
+
+`
+  },
+  {
+    name: 'Recharge & Payment',
+    imgUrl: '//s.weituibao.com/1583585285465/cz.png',
+    categoryId: 100006,
+    svg:`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+  <path fill-rule="evenodd" d="M12.516 2.17a.75.75 0 00-1.032 0 11.209 11.209 0 01-7.877 3.08.75.75 0 00-.722.515A12.74 12.74 0 002.25 9.75c0 5.942 4.064 10.933 9.563 12.348a.749.749 0 00.374 0c5.499-1.415 9.563-6.406 9.563-12.348 0-1.39-.223-2.73-.635-3.985a.75.75 0 00-.722-.516l-.143.001c-2.996 0-5.717-1.17-7.734-3.08zm3.094 8.016a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd" />
+</svg>
+`
+  },
+  {
+    name: 'Gift Buy',
+    imgUrl: '//s.weituibao.com/1583585285469/pt.png',
+    categoryId: 100007,
+    svg:`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+  <path d="M9.375 3a1.875 1.875 0 000 3.75h1.875v4.5H3.375A1.875 1.875 0 011.5 9.375v-.75c0-1.036.84-1.875 1.875-1.875h3.193A3.375 3.375 0 0112 2.753a3.375 3.375 0 015.432 3.997h3.943c1.035 0 1.875.84 1.875 1.875v.75c0 1.036-.84 1.875-1.875 1.875H12.75v-4.5h1.875a1.875 1.875 0 10-1.875-1.875V6.75h-1.5V4.875C11.25 3.839 10.41 3 9.375 3zM11.25 12.75H3v6.75a2.25 2.25 0 002.25 2.25h6v-9zM12.75 12.75v9h6.75a2.25 2.25 0 002.25-2.25v-6.75h-9z" />
+</svg>
+
+`
+  },
+  {
+    name: 'Bill Payments',
+    imgUrl: '//s.weituibao.com/1583585285470/qb.png',
+    categoryId: 100010,
+    svg:`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+  <path d="M4.5 3.75a3 3 0 00-3 3v.75h21v-.75a3 3 0 00-3-3h-15z" />
+  <path fill-rule="evenodd" d="M22.5 9.75h-21v7.5a3 3 0 003 3h15a3 3 0 003-3v-7.5zm-18 3.75a.75.75 0 01.75-.75h6a.75.75 0 010 1.5h-6a.75.75 0 01-.75-.75zm.75 2.25a.75.75 0 000 1.5h3a.75.75 0 000-1.5h-3z" clip-rule="evenodd" />
+</svg>
+`
+  },
+  {
+    name: 'Get Coupons',
+    imgUrl: '//s.weituibao.com/1583585285468/juan.png',
+    categoryId: 100008,
+    svg:`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+  <path fill-rule="evenodd" d="M1.5 6.375c0-1.036.84-1.875 1.875-1.875h17.25c1.035 0 1.875.84 1.875 1.875v3.026a.75.75 0 01-.375.65 2.249 2.249 0 000 3.898.75.75 0 01.375.65v3.026c0 1.035-.84 1.875-1.875 1.875H3.375A1.875 1.875 0 011.5 17.625v-3.026a.75.75 0 01.374-.65 2.249 2.249 0 000-3.898.75.75 0 01-.374-.65V6.375zm15-1.125a.75.75 0 01.75.75v.75a.75.75 0 01-1.5 0V6a.75.75 0 01.75-.75zm.75 4.5a.75.75 0 00-1.5 0v.75a.75.75 0 001.5 0v-.75zm-.75 3a.75.75 0 01.75.75v.75a.75.75 0 01-1.5 0v-.75a.75.75 0 01.75-.75zm.75 4.5a.75.75 0 00-1.5 0V18a.75.75 0 001.5 0v-.75zM6 12a.75.75 0 01.75-.75H12a.75.75 0 010 1.5H6.75A.75.75 0 016 12zm.75 2.25a.75.75 0 000 1.5h3a.75.75 0 000-1.5h-3z" clip-rule="evenodd" />
+</svg>
+`
+  },
+  {
+    name: 'Save Money',
+    imgUrl: '//s.weituibao.com/1583585285471/sq.png',
+    categoryId: 100009,
+    svg:`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+  <path d="M2.273 5.625A4.483 4.483 0 015.25 4.5h13.5c1.141 0 2.183.425 2.977 1.125A3 3 0 0018.75 3H5.25a3 3 0 00-2.977 2.625zM2.273 8.625A4.483 4.483 0 015.25 7.5h13.5c1.141 0 2.183.425 2.977 1.125A3 3 0 0018.75 6H5.25a3 3 0 00-2.977 2.625zM5.25 9a3 3 0 00-3 3v6a3 3 0 003 3h13.5a3 3 0 003-3v-6a3 3 0 00-3-3H15a.75.75 0 00-.75.75 2.25 2.25 0 01-4.5 0A.75.75 0 009 9H5.25z" />
+</svg>
+`
+  },
+  
+]
+
     }
   },
 
@@ -448,6 +451,18 @@ export default {
 </script>
 
 <style lang="less" scoped >
+
+.sales-tag {
+  position: relative;
+  top: -196px;
+ 
+  left: 56%;
+  background-color: #404040;
+  color: #fff;
+  padding: 1px 2px;
+
+}
+
   @import '../common/style/mixin';
   .home-header {
       position: fixed;
@@ -525,6 +540,10 @@ export default {
       width: 20%;
       text-align: center;
       img {
+        .wh(40px, 40px);
+        margin: 13px auto 8px auto;
+      }
+      span {
         .wh(40px, 40px);
         margin: 13px auto 8px auto;
       }

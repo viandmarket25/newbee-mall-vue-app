@@ -24,13 +24,17 @@
         <div class="product-images" style="width:360px;  ">
 
 
-          <transition name="slide-up" mode="out-in">
-            <img
-            class="product-image-tr"
-              :src="selectedPhoto"
-              alt="Product Image"
-            />
-          </transition>
+          
+            <div>
+              <transition  name="slide-up" mode="out-in">
+              <img v-if="selectedPhoto"
+              class="product-image-tr"
+                :src="selectedPhoto"
+                alt="Product Image"
+              />
+            </transition>
+            </div>
+       
           <!--
           <img
             v-for="(image, index) in product.media"
@@ -71,8 +75,20 @@
           
           </p>
           
-          
-          <p>₦ {{ product.attributes.price }} </p>
+        
+          <div class="price" style="font-size:11px; color:#e85d04;  ">₦ <strong style="font-size: 14px;"> {{ product.attributes.price }}</strong></div>
+         
+          <div               
+            
+            style="display:flex; flex-wrap: wrap; gap:6px;"
+          >
+          <span style="padding:4px 10px; font-size:9px; margin-top:10px;  background:#404040; color:#fff;">
+          Shipping from apapa, ikega Lagos / 
+          </span>
+        
+
+          </div>
+         
           <p>{{ product.attributes.description }}</p>
     
           <div               
@@ -89,9 +105,12 @@
                     <span style="padding:4px 10px; font-size:9px;  background:#404040; color:#fff;">
                       {{ product.attributes.stockCapacity }} IN STOCK
                     </span>
-                   
+
+                 
                   
           </div>
+         
+         
 
 
           </div>
@@ -112,52 +131,62 @@
           <div v-if="product.variants" style="background-color: #f1f1f1; height:0.4px;"></div>
            
           <div v-if="product.variants"  style=" padding:20px; " >
-          
+            {{ selectedVariant }}
           <div 
               v-for="(variant, index) in product.variants"
                     :key="index" style="margin-bottom: 20px;"    
                 class="variant-selector">
                 <label >{{ variant.title }}</label>
-                <div style="margin-bottom: 14px; font-size:12px; " class="variant-options">
-                 
+                <div style="margin-bottom: 14px; font-size:12px; " class="variant-options">              
                   <label style="display:flex; flex-wrap: wrap; gap:6px;"
-                    v-if="variant.variationType===`image-text`" >
-                   
+                    v-if="variant.variationType===`image-text`" >                 
                     <div               
                       v-for="(option, opindex) in variant.options"
                       :key="opindex"
                       :class=" variant.selectedOption === opindex?`selected-variant-image`: `variant-option-image `"
-                      @click="selectVariant(index, opindex)"
+                      @click="selectImageVariant(option.mediaSource,index, opindex)"
                       style="font-size:10px;"
                     >
                         <img         
                           :src="option.mediaSource"
                           style="width:60px; max-height:60px; margin-bottom: 0.4px; "
                           alt="Product Thumbnail"
-                          @click="viewImage(option.mediaSource)"
+                         
                         /><br/>
-                        <label> {{ option.title }} </label>
+                        <label> {{ option.title }}  </label>
                     </div>
-
                   </label>
-
-
-
-
 
                   <label style="display:flex; flex-wrap: wrap; gap:6px;"
                     v-if="variant.variationType===`text`" >
                    
-                    <div
-                      
+
+                    <label
                         v-for="(option, opindex) in variant.options"
                         :key="opindex"
-                        :class=" variant.selectedOption === opindex?`selected-variant`: `variant-option `"
+                    >
+                      <div                    
+                        v-if="variant.selectedOption === opindex"                     
+                        class="selected-variant"
                         @click="selectVariant(index, opindex)"
                         style="font-size:10px;"
                       >
-                      <label v-if="variant.variationType=='text'">  {{ option.title }} </label>
-                    </div>
+                        <label v-if="variant.variationType=='text'">  {{ option.title }} </label>
+                      </div>
+
+                     <div   
+                      v-if="variant.selectedOption !== opindex"        
+                      class="variant-option"
+                      @click="selectVariant(index, opindex)"
+                      style="font-size:10px;"
+                      >
+                        <label v-if="variant.variationType=='text'">  {{ option.title }} </label>
+                      </div>
+
+
+                    </label>
+
+
                   </label>
                 
 
@@ -165,17 +194,6 @@
 
                 </div>
             </div>
-
-
-
-     
-
-
-
-
-
-
-
 
           </div>
 
@@ -233,7 +251,7 @@
 
                       <div v-for="(review, index) in reviews" :key="index" class="review">
                         <div class="review-header">
-                          <div class="rating" style="display:flex; flex-wrap: wrap; gap:2px;"  >
+                          <div class="rating" style="display:flex; flex-wrap: wrap; gap:0.4px;"  >
                             <div v-for="star in review.rating" :key="star" class="star" :class="{ 'filled-star': star <= review.rating }"> </div>
                           </div>
                          
@@ -294,8 +312,8 @@
     <van-goods-action>
       <van-goods-action-icon icon="chat-o" text="Chat" />
       <van-goods-action-icon icon="cart-o" :info="!count ? '' : count" @click="goTo()" text="Cart"/>
-      <input type="button" style="width:44%; border-radius:0px; margin-right:10px; height:60px; color:#404040; background:#fff; border:1px solid #000; " @click="addCart" value="Add to Cart" />
-      <input type="button" style="width:44%; border-radius:0px; height:60px; color:#fff; background:#000; border:1px solid #000; " @click="goToCart" value="Buy Now" />
+      <input type="button" style="width:44%; border-radius:6px; margin-right:10px; height:60px; color:#404040; background:#fff; border:1px solid #000; " @click="addCart" value="Add to Cart" />
+      <input type="button" style="width:44%; border-radius:6px; height:60px; color:#fff; background:#000; border:1px solid #000; " @click="goToCart" value="Buy Now" />
      
     </van-goods-action>
   </div>
@@ -311,14 +329,14 @@ import productService from '@/service/products'
 
 export default {
   computed: {
-  selectedOptions() {
-    const selectedOptions = {};
-    for (const variant of this.product.variants) {
-      selectedOptions[variant.title] = variant.options.find(option => option.selected);
+  selectedOptions(optionIndex) {
+      const selectedOptions = {};
+      for (const variant of this.product.variants) {
+        selectedOptions[variant.title] = variant.options.find(option => option.selected);
+      }
+      return selectedOptions;
     }
-    return selectedOptions;
-  }
-},
+  },
   watch: {
   'product.variants': {
     deep: true,
@@ -424,6 +442,8 @@ export default {
 
       this.product.variants[variantIndex].selectedOption = option;
 
+      this.selectedVariant= selectedOption;
+
       this.product=  this.product
 
      // alert("opt"+option)
@@ -431,6 +451,16 @@ export default {
 
 
     },
+    selectImageVariant(url,variantIndex,option) {
+      this.product.variants[variantIndex].selectedOption = option;
+      this.selectedPhoto=url;
+      this.product=  this.product
+
+      // alert("opt"+option)
+      //  alert("vopt"+this.product.variants[variantIndex].selectedOption)
+
+
+      },
     async getProductDetails(){
       let id= this.$route.params.id;
      
@@ -681,6 +711,10 @@ button {
 
 .product-image-tr {
   /* Initial position for the transition */
+  
+  bottom: 0;
+  left: 0;
+  width: 100%;
 
 }
 
@@ -793,5 +827,24 @@ h2 {
 .review-comment {
   font-size: 16px;
   color: #333;
+}
+
+.slide-up-enter-active,
+.slide-up-leave-active {
+  transition: transform 0.5s;
+}
+.slide-up-enter, .slide-up-leave-to /* .slide-up-leave-active in <2.1.8 */ {
+  transform: translateY(100%);
+}
+
+.product-image-tr {
+   transition: opacity 0.5s ease;
+}
+.product-image-tr.slide-up-enter {
+   /* example showing chained classes since the myTransition- is added */
+   opacity: 0;
+}
+.product-image-tr.slide-up {
+   opacity: 1;
 }
 </style>
