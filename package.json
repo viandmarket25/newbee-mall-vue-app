@@ -9,6 +9,7 @@
     "commit": "echo \"Commit changes\"  && echo \"Adding files...\" && git add . && echo \"Commiting files...\" && git commit -m 'new commit' && echo \"Push changes...\" && git push origin dev --force && exit 1 "
   },
   "dependencies": {
+    "@vue/composition-api": "^1.7.2",
     "axios": "^0.19.2",
     "better-scroll": "^1.15.2",
     "core-js": "^3.4.3",

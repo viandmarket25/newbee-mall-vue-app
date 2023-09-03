@@ -238,6 +238,20 @@ export default {
     imgUrl: 'https://images.asos-media.com/products/collusion-x018-unisex-y2k-wide-leg-skater-jeans-with-branding-in-raw-denim/204673736-1-midblue?$n_960w$&wid=952&fit=constrain',
     description: 'Get ready to boost your running experience with Adidas Ultra Boost shoes.',
     link: '/products/adidas-ultra-boost'
+  },
+  {
+    brand: 'Samsung',
+    product: 'Galaxy Watch 4',
+    imgUrl: 'https://images.asos-media.com/products/collusion-x018-unisex-y2k-wide-leg-skater-jeans-with-branding-in-raw-denim/204673736-1-midblue?$n_960w$&wid=952&fit=constrain',
+    description: 'Stay connected and track your fitness with the Samsung Galaxy Watch 4.',
+    link: '/products/samsung-galaxy-watch-4'
+  },
+  {
+    brand: 'Adidas',
+    product: 'Ultra Boost',
+    imgUrl: 'https://images.asos-media.com/products/collusion-x018-unisex-y2k-wide-leg-skater-jeans-with-branding-in-raw-denim/204673736-1-midblue?$n_960w$&wid=952&fit=constrain',
+    description: 'Get ready to boost your running experience with Adidas Ultra Boost shoes.',
+    link: '/products/adidas-ultra-boost'
   }
 ]
 ,

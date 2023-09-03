@@ -1,20 +1,9 @@
-<!--
- * 严肃声明：
- * 开源版本请务必保留此注释头信息，若删除我方将保留所有法律责任追究！
- * 本系统已申请软件著作权，受国家版权局知识产权以及国家计算机软件著作权保护！
- * 可正常分享和学习源码，不得用于违法犯罪活动，违者必究！
- * Copyright (c) 2020 陈尼克 all rights reserved.
- * 版权所有，侵权必究！
- *
--->
 
 <template>
-  <div class="product-detail">
-    <s-header v-if="product.attributes" style="font-size:14px;" :name="product.attributes.title"></s-header>
+  <div v-if="!isLoading" class="product-detail">
+    <s-header v-if="product.attributes.title" style="font-size:14px;" :name="``+product.attributes.title"></s-header>
 
 
-   
-    
     <div class="detail-content">
 
 
@@ -45,6 +34,149 @@
             @click="viewImage(image.url)"
           />
           -->
+
+
+          <div  style="background-color: #f1f1f1; height:0.4px; margin-top:10px;"></div>
+           
+
+          <div class="product-detail-tabs" style="margin-top:10px;">
+          <div class="tab-buttons">
+            <button style="font-size: 13px; border-radius:0px; "
+              v-for="(tab, index) in tabs"
+              :key="index"
+              :class="{ active: activeTab === index }"
+              @click="changeTab(index)"
+            >
+
+            <span v-if="tab==`Details`" style=" font-size:9px; height:18px; position:relative; top: 2px; color:#000;">     
+              <svg 
+                style="width:12px;  height:12px;"
+                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+                  <path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm8.706-1.442c1.146-.573 2.437.463 2.126 1.706l-.709 2.836.042-.02a.75.75 0 01.67 1.34l-.04.022c-1.147.573-2.438-.463-2.127-1.706l.71-2.836-.042.02a.75.75 0 11-.671-1.34l.041-.022zM12 9a.75.75 0 100-1.5.75.75 0 000 1.5z" clip-rule="evenodd" />
+              </svg>
+            </span>
+            <span v-if="tab==`Reviews`" style=" font-size:9px; height:18px; position:relative; top: 2px; color:#000;">     
+            
+              <svg 
+                style="width:12px;  height:12px;"
+                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+                  <path fill-rule="evenodd" d="M4.804 21.644A6.707 6.707 0 006 21.75a6.721 6.721 0 003.583-1.029c.774.182 1.584.279 2.417.279 5.322 0 9.75-3.97 9.75-9 0-5.03-4.428-9-9.75-9s-9.75 3.97-9.75 9c0 2.409 1.025 4.587 2.674 6.192.232.226.277.428.254.543a3.73 3.73 0 01-.814 1.686.75.75 0 00.44 1.223zM8.25 10.875a1.125 1.125 0 100 2.25 1.125 1.125 0 000-2.25zM10.875 12a1.125 1.125 0 112.25 0 1.125 1.125 0 01-2.25 0zm4.875-1.125a1.125 1.125 0 100 2.25 1.125 1.125 0 000-2.25z" clip-rule="evenodd" />
+              </svg>
+
+            </span>
+
+
+
+              {{ tab }}
+            </button>
+          </div>
+
+          <div class="tab-content">
+            <div v-for="(tab, index) in tabs" :key="index" v-show="activeTab === index">
+            
+              <div style="min-width:360px; height:2px;">
+              
+              </div>
+
+              <div v-if="tab==`Reviews`" style="width:100%; min-height:20px;">
+                <div class="collapsible">
+               
+                <transition name="slide-fade" mode="out-in">
+                  <div >
+                    <div class="product-reviews">
+                      <div style="background-color: #f1f1f1; height:0.4px;"></div>
+
+                      <div v-for="(review, index) in reviews" :key="index" class="review">
+                        <div class="review-header">
+                          <div class="rating" style="display:flex; flex-wrap: wrap; gap:0.4px;"  >
+                            <div v-for="star in review.rating" :key="star" class="star" :class="{ 'filled-star': star <= review.rating }"> </div>
+                          </div>
+                         
+                        </div>
+                        <div class="review-header">                    
+                          <div class="review-info">
+                            <span style="font-size:12px; font-weight:600;  " class="username">{{ review.username }}</span>
+                            <span style="font-size:12px;  " class="date-time">{{ review.dateTime }}</span>
+                          </div>
+                        </div>
+
+                        <div class="review-header">
+                          
+                          <div class="image-grid">
+                            <div class="image-item">
+                                <img :src="product.attributes.mediaSource" alt="Image 1">
+                            </div>
+                            <div class="image-item">
+                                <img :src="product.attributes.mediaSource" alt="Image 2">
+                            </div>
+                            <div class="image-item">
+                                <img :src="product.attributes.mediaSource" alt="Image 3">
+                            </div>
+                            <!-- Add more image items as needed -->
+                          </div>
+                        </div>
+
+
+                        <div style="font-size:12px; text-align: left; " class="review-comment">{{ review.comment }}</div>
+                      </div>
+                    </div>
+                 
+                  </div>
+                </transition>
+              </div>
+              
+              </div>
+              <div v-if="tab==`Details`" style="width:360px; min-height:20px; text-align:left;">
+                
+                <p v-if="product.attributes.description" style="font-weight: bold;" >
+                 DESCRIPTION
+                </p>
+                <p v-if="product.attributes.description">
+                  {{ product.attributes.description }} 
+
+                </p>
+
+                <p v-if="product.attributes.specifications" style="font-weight: bold;" >
+                 SPECIFICATIONS
+                </p>
+                <p v-if="product.attributes.specifications">
+                  {{ product.attributes.specifications }} 
+
+                </p>
+
+                <div v-for="(image, imageIndex) in product.moreMedia" :key="imageIndex" >
+                  <transition  name="slide-up" mode="out-in">
+                  <img 
+                  v-if="product.moreMedia"
+                  class="product-image-tr"
+                    :src="image.url"
+                    alt="Product Image"
+                  />
+                </transition>
+                </div>
+
+
+             
+          
+              
+
+
+              </div>
+            
+
+
+            </div>
+          </div>
+        </div>
+
+
+
+
+
+
+
+
+
         </div>
         <div class="product-thumbnails" style="width:32px; padding-left:10px; border-left:0.4px solid #f1f1f1; ">
           <img
@@ -56,16 +188,16 @@
             @click="viewImage(thumbnail.url)"
           />
         </div>
-        <div class="product-info left-target-position" style="width:356px; padding:0px; background:#fbfbfb; border:0.4px solid #f1f1f1; text-align: left;">
+        <div class="product-info left-target-position" style="width:430px; padding:0px; background:#fdfdfd; border:0.4px solid #f1f1f1; text-align: left;">
           
           <div style=" padding:20px; " >
           
-          <p>
+          <p v-if="product.attributes.title">
             {{ product.attributes.title }} 
-           
-          
-          
+
           </p>
+
+
           <p style="color:#666;">
             4 Payments supported
             <span style="padding:2px 8px; font-size:10px; border-radius:20px;  background:#d0f4de; color:#404040;">
@@ -84,6 +216,23 @@
           >
           <span style="padding:4px 10px; font-size:9px; margin-top:10px;  background:#404040; color:#fff;">
           Shipping from apapa, ikega Lagos / 
+          </span>
+        
+
+          </div>
+
+          <div                      
+            style="display:flex; flex-wrap: wrap; gap:6px;"
+          >
+          <span style="padding:2px 8px;  margin-top:10px;  background:#fee440; color:#000;">
+      
+            <span style=" font-size:9px; height:18px; position:relative; top: 2px; color:#000;">
+            <svg xmlns="http://www.w3.org/2000/svg" style="width:12px;  height:12px;" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4">
+              <path fill-rule="evenodd" d="M11.54 22.351l.07.04.028.016a.76.76 0 00.723 0l.028-.015.071-.041a16.975 16.975 0 001.144-.742 19.58 19.58 0 002.683-2.282c1.944-1.99 3.963-4.98 3.963-8.827a8.25 8.25 0 00-16.5 0c0 3.846 2.02 6.837 3.963 8.827a19.58 19.58 0 002.682 2.282 16.975 16.975 0 001.145.742zM12 13.5a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd" />
+            </svg> 
+            </span>
+
+            <label style="line-height:12px; font-size:9px;"> 800M, arrives in 2 days </label>
           </span>
         
 
@@ -133,14 +282,16 @@
           <div v-if="product.variants"  style=" padding:20px; " >
             {{ selectedVariant }}
           <div 
-              v-for="(variant, index) in product.variants"
-                    :key="index" style="margin-bottom: 20px;"    
+              v-for="(variant, index) in variants"
+                    :key="index" style="margin-bottom: 10px;"    
                 class="variant-selector">
                 <label >{{ variant.title }}</label>
                 <div style="margin-bottom: 14px; font-size:12px; " class="variant-options">              
                   <label style="display:flex; flex-wrap: wrap; gap:6px;"
                     v-if="variant.variationType===`image-text`" >                 
-                    <div               
+                    <div  
+                    
+
                       v-for="(option, opindex) in variant.options"
                       :key="opindex"
                       :class=" variant.selectedOption === opindex?`selected-variant-image`: `variant-option-image `"
@@ -162,6 +313,7 @@
                    
 
                     <label
+                   
                         v-for="(option, opindex) in variant.options"
                         :key="opindex"
                     >
@@ -205,7 +357,7 @@
             <div>
                         
               <div class="collapsible">
-                <p @click="toggleShipping" class="header-text-de" style=" cursor:pointer;  font-size:11px; ">🚀 DELIVERY</p>
+                <p @click="toggleShipping" class="header-text-de" style=" cursor:pointer;  font-size:11px; ">🚀 SHIPPING</p>
                 <transition name="slide-fade" mode="out-in">
                   <div v-if="showShipping">
                     <p>We provide fast and reliable shipping options to ensure your orders are delivered to you promptly and securely.</p>
@@ -229,70 +381,7 @@
                 </transition>
               </div>
               
-              <div class="collapsible">
-                <label @click="toggleDelivery"  class="header-text-de"  style=" cursor:pointer; font-size:11px; ">📦 DELIVERY</label>
-                <transition name="slide-fade" mode="out-in">
-                  <div v-if="showDelivery">
-                    <p>Our dedicated delivery team ensures that your orders are carefully packaged and promptly delivered to your preferred address.</p>
-                    <p>⏰ Delivery Time: Estimated delivery times are provided during the checkout process based on your location and chosen shipping method.</p>
-                    <p>📦 Safe and Secure Packaging: We take extra care to package your items securely to prevent any damage during transit.</p>
-                    <p>📧 Delivery Confirmation: You'll receive a confirmation email and tracking information once your order has been dispatched.</p>
-                    <p>💼 International Delivery: Please note that international orders may be subject to customs duties and taxes, which are the responsibility of the recipient.</p>
-                  </div>
-                </transition>
-              </div>
-
-               <div class="collapsible">
-                <p @click="toggleReviews" class="header-text-de" style=" cursor:pointer;  font-size:11px; ">💬 REVIEWS</p>
-                <transition name="slide-fade" mode="out-in">
-                  <div v-if="showReviews">
-                    <div class="product-reviews">
-                      <div style="background-color: #f1f1f1; height:0.4px;"></div>
-
-                      <div v-for="(review, index) in reviews" :key="index" class="review">
-                        <div class="review-header">
-                          <div class="rating" style="display:flex; flex-wrap: wrap; gap:0.4px;"  >
-                            <div v-for="star in review.rating" :key="star" class="star" :class="{ 'filled-star': star <= review.rating }"> </div>
-                          </div>
-                         
-                        </div>
-
-                      
-                  
-
-
-                        <div class="review-header">
-                          
-                          <div class="review-info">
-                            <span style="font-size:12px; font-weight:600;  " class="username">{{ review.username }}</span>
-                            <span style="font-size:12px;  " class="date-time">{{ review.dateTime }}</span>
-                          </div>
-                        </div>
-
-                        <div class="review-header">
-                          
-                          <div class="image-grid">
-                            <div class="image-item">
-                                <img :src="product.attributes.mediaSource" alt="Image 1">
-                            </div>
-                            <div class="image-item">
-                                <img :src="product.attributes.mediaSource" alt="Image 2">
-                            </div>
-                            <div class="image-item">
-                                <img :src="product.attributes.mediaSource" alt="Image 3">
-                            </div>
-                            <!-- Add more image items as needed -->
-                          </div>
-                        </div>
-
-
-                        <div style="font-size:12px;  " class="review-comment">{{ review.comment }}</div>
-                      </div>
-                    </div>
-                 
-                  </div>
-                </transition>
-              </div>
+          
 
 
 
@@ -333,8 +422,8 @@
     <van-goods-action>
       <van-goods-action-icon icon="chat-o" text="Chat" />
       <van-goods-action-icon icon="cart-o" :info="!count ? '' : count" @click="goTo()" text="Cart"/>
-      <input type="button" style="width:44%; border-radius:6px; margin-right:10px; height:60px; color:#404040; background:#fff; border:1px solid #000; " @click="addCart" value="Add to Cart" />
-      <input type="button" style="width:44%; border-radius:6px; height:60px; color:#fff; background:#000; border:1px solid #000; " @click="goToCart" value="Buy Now" />
+      <input type="button" style="width:44%; border-radius:6px; cursor:pointer; margin-right:10px; height:60px; color:#404040; background:#fff; border:1px solid #000; " @click="addCart" value="ADD TO CART" />
+      <input type="button" style="width:44%; border-radius:6px; cursor:pointer;  height:60px; color:#fff; background:#000; border:1px solid #000; " @click="goToCart" value="BUY NOW" />
      
     </van-goods-action>
   </div>
@@ -345,6 +434,7 @@
 
 import { productDetailStore } from "@/pinia-store/product-detail.js";
 
+
 import { getDetail } from '../service/good'
 import { addCart } from '../service/cart'
 import sHeader from '@/components/SimpleHeader'
@@ -352,23 +442,17 @@ import { Toast } from 'vant'
 
 import productService from '@/service/products'
 
-
+let productDetailStateStore 
 
 export default {
   setup(){
-   // const productDetailStateStore = new productDetailStore();
 
 
-
+  
   },
   computed: {
-  selectedOptions(optionIndex) {
-      const selectedOptions = {};
-      for (const variant of this.product.variants) {
-        selectedOptions[variant.title] = variant.options.find(option => option.selected);
-      }
-      return selectedOptions;
-    }
+  
+
   },
   watch: {
   'product.variants': {
@@ -382,6 +466,14 @@ export default {
   },
   data() {
     return {
+      tabs: ["Details", "Reviews"],
+      activeTab: 0,
+      tabContents: [
+        "Product description goes here.",
+        "Specifications for the product.",
+        "Customer reviews and ratings.",
+      ],
+      isLoading:true,
       reviews: [
         {
           rating: 5,
@@ -444,9 +536,20 @@ export default {
    // const { data } = await getDetail(id)
    // this.detail = data
 
+    
+    productDetailStateStore =await  productDetailStore();
+
+    console.log("pinia store: ",productDetailStateStore)
+
     await this.getProductDetails();
+
+
+
   },
   methods: {
+    changeTab(index) {
+      this.activeTab = index;
+    },
     increaseQuantity() {
       this.quantity++;
     },
@@ -473,19 +576,26 @@ export default {
     },
     selectVariant(variantIndex,option) {
 
-      this.product.variants[variantIndex].selectedOption = option;
+      //console.log( this.product.variants[variantIndex])
 
-      this.selectedVariant= selectedOption;
+      //this.product.variants[variantIndex]['selectedOption'] = option;
+      this.$nextTick(() => {
+          // Adding the component back in
+         // this.renderComponent = true;
 
-      this.product=  this.product
+          productDetailStateStore . selectVariantOption(variantIndex,option)
 
-     // alert("opt"+option)
-     //  alert("vopt"+this.product.variants[variantIndex].selectedOption)
 
+          this.$forceUpdate();
+
+      });
+
+
+   
 
     },
     selectImageVariant(url,variantIndex,option) {
-      this.product.variants[variantIndex].selectedOption = option;
+      this.product.variants[variantIndex]['selectedOption'] = option;
       this.selectedPhoto=url;
       this.product=  this.product
 
@@ -503,7 +613,9 @@ export default {
       if(result.data['resultCode']==1){
         this.product=result.data['resultContent']
 
-       // productDetailStateStore.setVariants(this.product.variants)
+        productDetailStateStore.setVariants(this.product.variants)
+
+        this.variants=productDetailStateStore.getVariants
 
         // ::::::::::: variant selection
         for(let v=0; v<this.product.variants.length; v++){
@@ -512,7 +624,12 @@ export default {
 
         }
 
+
+        console.log(this.product)
+
         this.selectedPhoto=this.product.media[0].url
+
+        this.isLoading=false;
        
         
       }
@@ -680,9 +797,8 @@ export default {
   cursor: pointer;
 }
 .variant-option:hover {
-
   border: 1px solid #404040;
-  border-radius: 0px;
+  background:#fafafa;
   cursor: pointer;
 }
 
@@ -791,7 +907,8 @@ h2 {
   border:none;
   outline:none;
   width:30px;
- 
+  background:#eee;
+  color:#000;
   padding: 2px 6px;
   font-size: 12px;
 
@@ -908,6 +1025,49 @@ h2 {
     max-width: 100%;
     height: auto;
     display: block;
+}
+
+.product-detail-tabs {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  max-width: 360px;
+  margin: 0 auto;
+}
+
+.tab-buttons {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.tab-buttons button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 2px 4px;
+  margin-right:10px;
+  font-size: 12px;
+  text-align: left; 
+  color:#888;
+  transition: background-color 0.3s;
+}
+
+.tab-buttons button.active {
+  background-color: #f1f1f1;
+  color: #000;
+}
+
+.tab-content > div {
+  
+  padding: 2px;
+}
+
+.tab-content > div.show {
+  display: block;
 }
 
 </style>

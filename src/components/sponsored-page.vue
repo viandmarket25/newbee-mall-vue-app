@@ -141,11 +141,11 @@ export default {
   data(){
     return {
        fastFeatures: [
-              'Instant Checkout',
-              'One-Click Purchase',
-              'Fast Shipping',
-              'Real-time Tracking',
-              'Secure Payments',
+              '⚡️ Instant Checkout',
+              '🛒 One-Click Purchase',
+              '🚀 Fast Shipping',
+              '🚚 Real-time Tracking',
+              '🔒 Secure Payments',
             ],
       buyerView:{
         featured:{canShow:true},

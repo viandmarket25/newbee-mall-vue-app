@@ -14,10 +14,19 @@ export const productDetailStore = defineStore("productDetailStateStore", {
 
     },
     selectVariantOption(variantIndex, optionIndex){
-        this.variants[variantIndex].selectedOption=optionIndex;
+       // this.variants[variantIndex].selectedOption=optionIndex;
+
+        this.variants[variantIndex]['selectedOption'] = optionIndex;
+
+        console.log(  this.variants[variantIndex])
 
     }
 
+  },
+  getters: {
+    getVariants() {
+      return this.variants;
+    },
   },
 });
 
